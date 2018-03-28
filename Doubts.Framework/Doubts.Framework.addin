@@ -1,0 +1,18 @@
+﻿<AddIn name="DoubtsFramework"
+       author="Aomi"
+       copyright=""
+       description="框架内核"
+       addInManagerHidden = "true">
+
+  <Manifest>
+    <Identity name = "Doubts.Framework"/>
+  </Manifest>
+
+  <Runtime>
+    <Import assembly=":Doubts.AomiEx" />
+    <Import assembly=":Doubts.Framework">
+      <Doozer name="Renderer" class="Doubts.Framework.DoozerImpl.RendererDoozer"/>
+    </Import>
+  </Runtime>
+
+</AddIn>

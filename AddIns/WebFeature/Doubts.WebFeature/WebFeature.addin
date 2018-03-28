@@ -1,0 +1,22 @@
+﻿<AddIn name="Main"
+       author="Aomi"
+       copyright=""
+       description="Web主框"
+       addInManagerHidden = "preinstalled">
+
+  <Manifest>
+    <Identity name = "Doubts.WebFeature"/>
+  </Manifest>
+
+  <Runtime>
+    <Import assembly=":Doubts.AomiEx" />
+    <Import assembly=":Doubts.Framework" />
+    <Import assembly="Doubts.WebFeature.dll" />
+    <Import assembly="Doubts.WebFramwork.dll"/>
+  </Runtime>
+
+  <Path name="/Doubts/Renderer">
+    <Renderer id="Doubts.WebFeature.WebRenderer" class="Doubts.WebFeature.WebRenderer" />
+  </Path>
+
+</AddIn>

@@ -1,0 +1,6 @@
+D:\Job\Dev\workplace\Doubts\Doubts.WebFramwork\obj\Debug\Doubts.WebFramwork.csprojResolveAssemblyReference.cache
+D:\Job\Dev\workplace\Doubts\AddIns\WebFeature\Doubts.WebFramwork\bin\Debug\Doubts.WebFramwork.dll
+D:\Job\Dev\workplace\Doubts\AddIns\WebFeature\Doubts.WebFramwork\bin\Debug\Doubts.WebFramwork.pdb
+D:\Job\Dev\workplace\Doubts\AddIns\WebFeature\Doubts.WebFramwork\obj\Debug\Doubts.WebFramwork.dll
+D:\Job\Dev\workplace\Doubts\AddIns\WebFeature\Doubts.WebFramwork\obj\Debug\Doubts.WebFramwork.pdb
+D:\Job\Dev\workplace\Doubts\AddIns\WebFeature\Doubts.WebFramwork\obj\Debug\Doubts.WebFramwork.csprojResolveAssemblyReference.cache

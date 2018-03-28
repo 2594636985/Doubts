@@ -1,0 +1,14 @@
+D:\Job\Dev\workplace\Taomi\Doubts.AomiEx\obj\Debug\Doubts.AomiEx.csprojResolveAssemblyReference.cache
+D:\Job\Dev\workplace\Taomi\Doubts.AomiEx\obj\Debug\Doubts.AomiEx.Properties.StringResources.resources
+D:\Job\Dev\workplace\Taomi\Doubts.AomiEx\obj\Debug\Doubts.AomiEx.csproj.GenerateResource.Cache
+D:\Job\Dev\workplace\Taomi\Doubts.AomiEx\bin\Debug\Doubts.AomiEx.dll
+D:\Job\Dev\workplace\Taomi\Doubts.AomiEx\bin\Debug\Doubts.AomiEx.pdb
+D:\Job\Dev\workplace\Taomi\Doubts.AomiEx\obj\Debug\Doubts.AomiEx.dll
+D:\Job\Dev\workplace\Taomi\Doubts.AomiEx\obj\Debug\Doubts.AomiEx.pdb
+D:\Job\Dev\workplace\Doubts\Doubts.AomiEx\bin\Debug\Doubts.AomiEx.dll
+D:\Job\Dev\workplace\Doubts\Doubts.AomiEx\bin\Debug\Doubts.AomiEx.pdb
+D:\Job\Dev\workplace\Doubts\Doubts.AomiEx\obj\Debug\Doubts.AomiEx.Properties.StringResources.resources
+D:\Job\Dev\workplace\Doubts\Doubts.AomiEx\obj\Debug\Doubts.AomiEx.csproj.GenerateResource.Cache
+D:\Job\Dev\workplace\Doubts\Doubts.AomiEx\obj\Debug\Doubts.AomiEx.dll
+D:\Job\Dev\workplace\Doubts\Doubts.AomiEx\obj\Debug\Doubts.AomiEx.pdb
+D:\Job\Dev\workplace\Doubts\Doubts.AomiEx\obj\Debug\Doubts.AomiEx.csprojResolveAssemblyReference.cache

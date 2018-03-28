@@ -1,0 +1,11 @@
+﻿<AddIn name="DoubtsMainShell"
+       author="Aomi"
+       copyright=""
+       description="执行外壳"
+       addInManagerHidden = "true">
+
+  <Manifest>
+    <Identity name = "DoubtsMainShell"/>
+  </Manifest>
+
+</AddIn>

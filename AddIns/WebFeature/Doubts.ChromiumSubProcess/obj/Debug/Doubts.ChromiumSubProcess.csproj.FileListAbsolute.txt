@@ -1,0 +1,11 @@
+D:\Job\Dev\workplace\Doubts\AddIns\WebFeature\Doubts.ChromiumSubProcess\bin\Debug\Doubts.ChromiumSubProcess.exe
+D:\Job\Dev\workplace\Doubts\AddIns\WebFeature\Doubts.ChromiumSubProcess\bin\Debug\Doubts.ChromiumSubProcess.pdb
+D:\Job\Dev\workplace\Doubts\AddIns\WebFeature\Doubts.ChromiumSubProcess\bin\Debug\Doubts.WebFramwork.dll
+D:\Job\Dev\workplace\Doubts\AddIns\WebFeature\Doubts.ChromiumSubProcess\bin\Debug\Doubts.WebFramwork.pdb
+D:\Job\Dev\workplace\Doubts\AddIns\WebFeature\Doubts.ChromiumSubProcess\obj\Debug\Doubts.ChromiumSubProcess.csprojResolveAssemblyReference.cache
+D:\Job\Dev\workplace\Doubts\AddIns\WebFeature\Doubts.ChromiumSubProcess\obj\Debug\Doubts.ChromiumSubProcess.Properties.Resources.resources
+D:\Job\Dev\workplace\Doubts\AddIns\WebFeature\Doubts.ChromiumSubProcess\obj\Debug\Doubts.ChromiumSubProcess.csproj.GenerateResource.Cache
+D:\Job\Dev\workplace\Doubts\AddIns\WebFeature\Doubts.ChromiumSubProcess\obj\Debug\Doubts.ChromiumSubProcess.exe
+D:\Job\Dev\workplace\Doubts\AddIns\WebFeature\Doubts.ChromiumSubProcess\obj\Debug\Doubts.ChromiumSubProcess.pdb
+D:\Job\Dev\workplace\Doubts\Bin\Debug\AddIns\WebFeature\Doubts.ChromiumSubProcess.exe
+D:\Job\Dev\workplace\Doubts\Bin\Debug\AddIns\WebFeature\Doubts.ChromiumSubProcess.pdb
