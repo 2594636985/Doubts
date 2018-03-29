@@ -1,0 +1,6 @@
+D:\Job\Dev\workplace\Doubts\Doubts.AoGraphic\bin\Debug\Doubts.AoGraphic.dll
+D:\Job\Dev\workplace\Doubts\Doubts.AoGraphic\bin\Debug\Doubts.AoGraphic.pdb
+D:\Job\Dev\workplace\Doubts\Doubts.AoGraphic\obj\Debug\Doubts.AoGraphic.dll
+D:\Job\Dev\workplace\Doubts\Doubts.AoGraphic\obj\Debug\Doubts.AoGraphic.pdb
+D:\Job\Dev\Bin\Debug\AddIns\AoGraphic\Doubts.AoGraphic.dll
+D:\Job\Dev\Bin\Debug\AddIns\AoGraphic\Doubts.AoGraphic.pdb
