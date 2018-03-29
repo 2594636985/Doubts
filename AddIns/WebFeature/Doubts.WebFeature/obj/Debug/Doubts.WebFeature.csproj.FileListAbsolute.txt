@@ -15,3 +15,11 @@ D:\Job\Dev\workplace\Doubts\Bin\Debug\AddIns\WebFeature\Doubts.WebFeature.dll
 D:\Job\Dev\workplace\Doubts\Bin\Debug\AddIns\WebFeature\Doubts.WebFeature.pdb
 D:\Job\Dev\workplace\Doubts\Bin\Debug\AddIns\WebFeature\WebFeature.addin
 D:\Job\Dev\workplace\Doubts\AddIns\WebFeature\Doubts.WebFeature\obj\Debug\Doubts.WebFeature.FrmMain.resources
+D:\Job\Dev\Doubts\Bin\Debug\AddIns\WebFeature\WebFeature.addin
+D:\Job\Dev\Doubts\Bin\Debug\AddIns\WebFeature\Doubts.WebFeature.dll
+D:\Job\Dev\Doubts\Bin\Debug\AddIns\WebFeature\Doubts.WebFeature.pdb
+D:\Job\Dev\Doubts\AddIns\WebFeature\Doubts.WebFeature\obj\Debug\Doubts.WebFeature.csprojResolveAssemblyReference.cache
+D:\Job\Dev\Doubts\AddIns\WebFeature\Doubts.WebFeature\obj\Debug\Doubts.WebFeature.FrmMain.resources
+D:\Job\Dev\Doubts\AddIns\WebFeature\Doubts.WebFeature\obj\Debug\Doubts.WebFeature.csproj.GenerateResource.Cache
+D:\Job\Dev\Doubts\AddIns\WebFeature\Doubts.WebFeature\obj\Debug\Doubts.WebFeature.dll
+D:\Job\Dev\Doubts\AddIns\WebFeature\Doubts.WebFeature\obj\Debug\Doubts.WebFeature.pdb

@@ -1,4 +1,5 @@
-﻿using Doubts.WebFramework.DoUI;
+﻿using Doubts.AomiEx;
+using Doubts.WebFramework.DoUI;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,6 +20,7 @@ namespace Doubts.WebFeature
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            AddInManager.GetSingleInstance<>
             this.LoadUrl("www.baidu.com");
         }
     }

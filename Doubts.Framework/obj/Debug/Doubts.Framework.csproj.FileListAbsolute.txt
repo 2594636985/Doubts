@@ -6,3 +6,11 @@ D:\Job\Dev\workplace\Doubts\Doubts.Framework\obj\Debug\Doubts.Framework.csprojRe
 D:\Job\Dev\workplace\Doubts\Doubts.Framework\obj\Debug\Doubts.Framework.dll
 D:\Job\Dev\workplace\Doubts\Doubts.Framework\obj\Debug\Doubts.Framework.pdb
 D:\Job\Dev\workplace\Doubts\Doubts.Framework\bin\Debug\Doubts.Framework.addin
+D:\Job\Dev\Doubts\Doubts.Framework\bin\Debug\Doubts.Framework.addin
+D:\Job\Dev\Doubts\Doubts.Framework\bin\Debug\Doubts.Framework.dll
+D:\Job\Dev\Doubts\Doubts.Framework\bin\Debug\Doubts.Framework.pdb
+D:\Job\Dev\Doubts\Doubts.Framework\bin\Debug\Doubts.AomiEx.dll
+D:\Job\Dev\Doubts\Doubts.Framework\bin\Debug\Doubts.AomiEx.pdb
+D:\Job\Dev\Doubts\Doubts.Framework\obj\Debug\Doubts.Framework.csprojResolveAssemblyReference.cache
+D:\Job\Dev\Doubts\Doubts.Framework\obj\Debug\Doubts.Framework.dll
+D:\Job\Dev\Doubts\Doubts.Framework\obj\Debug\Doubts.Framework.pdb
