@@ -3,3 +3,7 @@ D:\Job\Dev\workplace\Doubts\Doubts.Thought\bin\Debug\Doubts.Thought.pdb
 D:\Job\Dev\workplace\Doubts\Doubts.Thought\obj\Debug\Doubts.Thought.dll
 D:\Job\Dev\workplace\Doubts\Doubts.Thought\obj\Debug\Doubts.Thought.pdb
 D:\Job\Dev\workplace\Doubts\Doubts.Thought\obj\Debug\Doubts.Thought.csprojResolveAssemblyReference.cache
+D:\Job\Dev\Doubts\Doubts.Thought\bin\Debug\Doubts.Thought.dll
+D:\Job\Dev\Doubts\Doubts.Thought\bin\Debug\Doubts.Thought.pdb
+D:\Job\Dev\Doubts\Doubts.Thought\obj\Debug\Doubts.Thought.dll
+D:\Job\Dev\Doubts\Doubts.Thought\obj\Debug\Doubts.Thought.pdb

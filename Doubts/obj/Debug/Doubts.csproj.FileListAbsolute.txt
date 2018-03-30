@@ -20,3 +20,9 @@ D:\Job\Dev\workplace\Doubts\Doubts\obj\Debug\Doubts.csprojResolveAssemblyReferen
 D:\Job\Dev\workplace\Doubts\Doubts\obj\Debug\Doubts.exe
 D:\Job\Dev\workplace\Doubts\Doubts\obj\Debug\Doubts.pdb
 D:\Job\Dev\workplace\Doubts\Bin\Debug\Doubts.Framework.addin
+D:\Job\Dev\Doubts\Bin\Debug\Doubts.Framework.addin
+D:\Job\Dev\Doubts\Bin\Debug\Doubts.exe
+D:\Job\Dev\Doubts\Bin\Debug\Doubts.pdb
+D:\Job\Dev\Doubts\Doubts\obj\Debug\Doubts.csprojResolveAssemblyReference.cache
+D:\Job\Dev\Doubts\Doubts\obj\Debug\Doubts.exe
+D:\Job\Dev\Doubts\Doubts\obj\Debug\Doubts.pdb

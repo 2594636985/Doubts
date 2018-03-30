@@ -12,7 +12,7 @@
     <Import assembly=":Doubts.AomiEx" />
     <Import assembly=":Doubts.Framework" />
     <Import assembly="Doubts.WebFeature.dll" />
-    <Import assembly="Doubts.WebFramwork.dll"/>
+    <Import assembly="Doubts.WebFramework.dll"/>
   </Runtime>
 
   <Path name="/Doubts/Renderer">

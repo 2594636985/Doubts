@@ -4,3 +4,7 @@ D:\Job\Dev\workplace\Doubts\Doubts.AoGraphic\obj\Debug\Doubts.AoGraphic.dll
 D:\Job\Dev\workplace\Doubts\Doubts.AoGraphic\obj\Debug\Doubts.AoGraphic.pdb
 D:\Job\Dev\Bin\Debug\AddIns\AoGraphic\Doubts.AoGraphic.dll
 D:\Job\Dev\Bin\Debug\AddIns\AoGraphic\Doubts.AoGraphic.pdb
+D:\Job\Dev\Doubts\Bin\Debug\AddIns\AoGraphic\Doubts.AoGraphic.dll
+D:\Job\Dev\Doubts\Bin\Debug\AddIns\AoGraphic\Doubts.AoGraphic.pdb
+D:\Job\Dev\Doubts\AddIns\AoGraphic\Doubts.AoGraphic\obj\Debug\Doubts.AoGraphic.dll
+D:\Job\Dev\Doubts\AddIns\AoGraphic\Doubts.AoGraphic\obj\Debug\Doubts.AoGraphic.pdb

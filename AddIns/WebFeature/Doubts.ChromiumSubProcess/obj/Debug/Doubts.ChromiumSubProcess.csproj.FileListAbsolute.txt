@@ -12,7 +12,5 @@ D:\Job\Dev\workplace\Doubts\Bin\Debug\AddIns\WebFeature\Doubts.ChromiumSubProces
 D:\Job\Dev\Doubts\Bin\Debug\AddIns\WebFeature\Doubts.ChromiumSubProcess.exe
 D:\Job\Dev\Doubts\Bin\Debug\AddIns\WebFeature\Doubts.ChromiumSubProcess.pdb
 D:\Job\Dev\Doubts\AddIns\WebFeature\Doubts.ChromiumSubProcess\obj\Debug\Doubts.ChromiumSubProcess.csprojResolveAssemblyReference.cache
-D:\Job\Dev\Doubts\AddIns\WebFeature\Doubts.ChromiumSubProcess\obj\Debug\Doubts.ChromiumSubProcess.Properties.Resources.resources
-D:\Job\Dev\Doubts\AddIns\WebFeature\Doubts.ChromiumSubProcess\obj\Debug\Doubts.ChromiumSubProcess.csproj.GenerateResource.Cache
 D:\Job\Dev\Doubts\AddIns\WebFeature\Doubts.ChromiumSubProcess\obj\Debug\Doubts.ChromiumSubProcess.exe
 D:\Job\Dev\Doubts\AddIns\WebFeature\Doubts.ChromiumSubProcess\obj\Debug\Doubts.ChromiumSubProcess.pdb

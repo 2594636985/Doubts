@@ -89,9 +89,12 @@ namespace Doubts.AomiEx
                             //$ICSharpCode.TextTemplating/TextTemplating.dll
 
                             int pos = assembly.IndexOf('/');
+
                             if (pos < 0)
                                 throw new AddInException("Expected '/' in path beginning with '$'!");
+
                             string referencedAddIn = assembly.Substring(1, pos - 1);
+
                             foreach (var addIn in addInTree.AddIns)
                             {
                                 if (addIn.Enabled && addIn.Manifest.Identities.ContainsKey(referencedAddIn))
@@ -102,10 +105,12 @@ namespace Doubts.AomiEx
                                     break;
                                 }
                             }
+
                             if (loadedAssembly == null)
                             {
                                 throw new FileNotFoundException("Could not find referenced AddIn " + referencedAddIn);
                             }
+
                         }
                         else
                         {
@@ -164,9 +169,21 @@ namespace Doubts.AomiEx
         public Type FindType(string className)
         {
             Assembly asm = LoadedAssembly;
+
             if (asm == null)
                 return null;
+
             return asm.GetType(className);
+        }
+
+        public Stream FindResources(string resourceName)
+        {
+            Assembly asm = LoadedAssembly;
+
+            if (asm == null)
+                return null;
+
+            return asm.GetManifestResourceStream(resourceName);
         }
 
         internal static List<Runtime> ReadSection(XmlReader reader, AddIn addIn, string hintPath)
@@ -279,7 +296,7 @@ namespace Doubts.AomiEx
 
         protected virtual void ShowError(string message)
         {
-           
+
         }
     }
 }

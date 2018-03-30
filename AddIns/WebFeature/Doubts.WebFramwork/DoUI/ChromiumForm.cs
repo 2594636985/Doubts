@@ -1,4 +1,5 @@
-﻿using Chromium.WebBrowser;
+﻿using Chromium;
+using Chromium.WebBrowser;
 using Doubts.WebFramework.Internal;
 using Doubts.WebFramework.Internal.Imports;
 using System;
@@ -10,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static Chromium.Remote.CfrRuntime;
 
 namespace Doubts.WebFramework.DoUI
 {
@@ -622,12 +624,12 @@ namespace Doubts.WebFramework.DoUI
 
         public void LoadString(string stringVal, string url)
         {
-            this.LoadString(stringVal, url);
+            this.browser.LoadString(stringVal, url);
         }
 
         public void LoadString(string stringVal)
         {
-            this.LoadString(stringVal);
+            this.browser.LoadString(stringVal);
         }
 
         #endregion

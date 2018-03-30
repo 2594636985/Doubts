@@ -54,6 +54,20 @@ namespace Doubts.AomiEx
             get { return initialized; }
         }
 
+        public static object GetEntityInstance(string path, object parameter = null)
+        {
+            return addInEngine.BuildItem(path, parameter);
+        }
+
+        public static T GetEntityInstance<T>(string path, object parameter = null)
+        {
+            object entity = addInEngine.BuildItem(path, parameter);
+
+            if (entity != null)
+                return (T)entity;
+
+            return default(T);
+        }
 
         public static List<T> GetInstance<T>(string path, object parameter = null, bool throwOnNotFound = true)
         {

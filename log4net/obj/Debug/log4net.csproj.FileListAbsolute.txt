@@ -8,3 +8,8 @@ D:\Job\Dev\workplace\Doubts\log4net\bin\Debug\log4net.pdb
 D:\Job\Dev\workplace\Doubts\log4net\obj\Debug\log4net.dll
 D:\Job\Dev\workplace\Doubts\log4net\obj\Debug\log4net.pdb
 D:\Job\Dev\workplace\Doubts\log4net\obj\Debug\log4net.csprojResolveAssemblyReference.cache
+D:\Job\Dev\Doubts\log4net\bin\Debug\log4net.dll
+D:\Job\Dev\Doubts\log4net\bin\Debug\log4net.pdb
+D:\Job\Dev\Doubts\log4net\obj\Debug\log4net.csprojResolveAssemblyReference.cache
+D:\Job\Dev\Doubts\log4net\obj\Debug\log4net.dll
+D:\Job\Dev\Doubts\log4net\obj\Debug\log4net.pdb

@@ -12,6 +12,8 @@
     <Import assembly=":Doubts.AomiEx" />
     <Import assembly=":Doubts.Framework">
       <Doozer name="Renderer" class="Doubts.Framework.DoozerImpl.RendererDoozer"/>
+      <Doozer name="Html" class="Doubts.Framework.DoozerImpl.HtmlDoozer"/>
+      <Doozer name="Function" class="Doubts.Framework.DoozerImpl.FunctionDoozer"/>
     </Import>
   </Runtime>
 

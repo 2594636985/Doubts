@@ -32,6 +32,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -39,7 +40,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AssemblyExtension.cs" />
+    <Compile Include="DoozerImpl\FunctionDoozer.cs" />
+    <Compile Include="DoozerImpl\HtmlDoozer.cs" />
     <Compile Include="DoozerImpl\RendererDoozer.cs" />
+    <Compile Include="Function.cs" />
+    <Compile Include="GlobalKeyboardHook.cs" />
     <Compile Include="Renderer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

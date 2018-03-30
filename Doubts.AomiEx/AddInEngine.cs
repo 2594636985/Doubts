@@ -68,6 +68,7 @@ namespace Doubts.AomiEx
             string parent = path.Substring(0, pos);
             string child = path.Substring(pos + 1);
             AddInTreeNode node = this.addInTree.GetTreeNode(parent);
+
             return node.BuildChildItem(child, parameter, additionalConditions);
         }
 

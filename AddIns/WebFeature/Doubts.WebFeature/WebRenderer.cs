@@ -9,6 +9,7 @@ using Chromium.WebBrowser.Event;
 using Doubts;
 using System.IO;
 using System.Reflection;
+using Doubts.WebFramework;
 
 namespace Doubts.WebFeature
 {
@@ -16,53 +17,24 @@ namespace Doubts.WebFeature
     {
         public override void Main(string[] args)
         {
-            string assemblyDir = System.IO.Path.GetDirectoryName(new System.Uri(System.Reflection.Assembly.GetExecutingAssembly().CodeBase).LocalPath);
-
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            if (CfxRuntime.PlatformArch == CfxPlatformArch.x64)
-                CfxRuntime.LibCefDirPath = Path.Combine(assemblyDir, @"cef64");
-            else
-                CfxRuntime.LibCefDirPath = Path.Combine(assemblyDir, @"cef");
+            string assemblyDir = Path.GetDirectoryName(new Uri(Assembly.GetExecutingAssembly().CodeBase).LocalPath);
 
-            ChromiumWebBrowser.OnBeforeCfxInitialize += ChromiumWebBrowser_OnBeforeCfxInitialize;
-            ChromiumWebBrowser.OnBeforeCommandLineProcessing += ChromiumWebBrowser_OnBeforeCommandLineProcessing;
-            ChromiumWebBrowser.Initialize();
+            if (DoubtsUILauncher.InitializeChromium(assemblyDir, BeforeChromiumInitialize))
+            {
+                //初始化成功，加载程序集内嵌的资源到运行时中
+                DoubtsUILauncher.RegisterEmbeddedScheme(Assembly.GetExecutingAssembly(), domainName: "res.welcome.local");
 
-
-            FrmMain frmMain = new FrmMain();
-
-            frmMain.Show();
-
-            Application.Run(frmMain);
-
-            CfxRuntime.Shutdown();
-
+                //启动主窗体
+                Application.Run(new FrmMain());
+            }
         }
 
-        private void ChromiumWebBrowser_OnBeforeCommandLineProcessing(CfxOnBeforeCommandLineProcessingEventArgs e)
+        private void BeforeChromiumInitialize(OnBeforeCfxInitializeEventArgs e)
         {
-            Console.WriteLine("ChromiumWebBrowser_OnBeforeCommandLineProcessing");
-            Console.WriteLine(e.CommandLine.CommandLineString);
-        }
-
-        private void ChromiumWebBrowser_OnBeforeCfxInitialize(OnBeforeCfxInitializeEventArgs e)
-        {
-            string assemblyDir = System.IO.Path.GetDirectoryName(new System.Uri(System.Reflection.Assembly.GetExecutingAssembly().CodeBase).LocalPath);
-
-            e.Settings.BrowserSubprocessPath = Path.Combine(assemblyDir, "Doubts.ChromiumSubProcess.exe");
-
-            if (CfxRuntime.PlatformArch == CfxPlatformArch.x64)
-            {
-                e.Settings.LocalesDirPath = Path.Combine(assemblyDir, @"cef64\locales");
-                e.Settings.ResourcesDirPath = Path.Combine(assemblyDir, @"cef64");
-            }
-            else
-            {
-                e.Settings.LocalesDirPath = Path.Combine(assemblyDir, @"cef\locales");
-                e.Settings.ResourcesDirPath = Path.Combine(assemblyDir, @"cef");
-            }
+            e.Settings.LogSeverity = Chromium.CfxLogSeverity.Default;
         }
     }
 }

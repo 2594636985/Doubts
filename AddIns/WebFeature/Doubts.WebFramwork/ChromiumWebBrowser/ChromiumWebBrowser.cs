@@ -17,14 +17,16 @@ using Chromium.Remote.Event;
 
 using Chromium.WebBrowser.Event;
 
-namespace Chromium.WebBrowser {
+namespace Chromium.WebBrowser
+{
 
 
     /// <summary>
     /// Windows Forms webbrowser control based on ChromiumFX.
     /// </summary>
     [DesignerCategory("")]
-    public class ChromiumWebBrowser : Control {
+    public class ChromiumWebBrowser : Control
+    {
 
         private static CfxBrowserSettings defaultBrowserSettings;
 
@@ -33,9 +35,12 @@ namespace Chromium.WebBrowser {
         /// Any changes to these settings will only apply to new browsers,
         /// leaving already created browsers unaffected.
         /// </summary>
-        public static CfxBrowserSettings DefaultBrowserSettings {
-            get {
-                if(defaultBrowserSettings == null) {
+        public static CfxBrowserSettings DefaultBrowserSettings
+        {
+            get
+            {
+                if (defaultBrowserSettings == null)
+                {
                     defaultBrowserSettings = new CfxBrowserSettings();
                 }
                 return defaultBrowserSettings;
@@ -47,9 +52,11 @@ namespace Chromium.WebBrowser {
         /// and subscribe to browser process handler events.
         /// </summary>
         public static event OnBeforeCfxInitializeEventHandler OnBeforeCfxInitialize;
-        internal static void RaiseOnBeforeCfxInitialize(CfxSettings settings, CfxBrowserProcessHandler processHandler) {
+        internal static void RaiseOnBeforeCfxInitialize(CfxSettings settings, CfxBrowserProcessHandler processHandler)
+        {
             var handler = OnBeforeCfxInitialize;
-            if(handler != null) {
+            if (handler != null)
+            {
                 var e = new OnBeforeCfxInitializeEventArgs(settings, processHandler);
                 handler(e);
             }
@@ -67,9 +74,11 @@ namespace Chromium.WebBrowser {
         /// in undefined behavior including crashes.
         /// </summary>
         public static event OnBeforeCommandLineProcessingEventHandler OnBeforeCommandLineProcessing;
-        internal static void RaiseOnBeforeCommandLineProcessing(CfxOnBeforeCommandLineProcessingEventArgs e) {
+        internal static void RaiseOnBeforeCommandLineProcessing(CfxOnBeforeCommandLineProcessingEventArgs e)
+        {
             var handler = OnBeforeCommandLineProcessing;
-            if(handler != null) {
+            if (handler != null)
+            {
                 handler(e);
             }
         }
@@ -81,9 +90,11 @@ namespace Chromium.WebBrowser {
         /// processes.
         /// </summary>
         public static event OnRegisterCustomSchemesEventHandler OnRegisterCustomSchemes;
-        internal static void RaiseOnRegisterCustomSchemes(CfxOnRegisterCustomSchemesEventArgs e) {
+        internal static void RaiseOnRegisterCustomSchemes(CfxOnRegisterCustomSchemesEventArgs e)
+        {
             var handler = OnRegisterCustomSchemes;
-            if(handler != null) {
+            if (handler != null)
+            {
                 handler(e);
             }
         }
@@ -93,18 +104,22 @@ namespace Chromium.WebBrowser {
         /// to CfrRenderProcessHandler remote callback events.
         /// </summary>
         public static event RemoteProcessCreatedEventHandler RemoteProcessCreated;
-        internal static void RaiseRemoteProcessCreated(CfrRenderProcessHandler renderProcessHandler) {
+        internal static void RaiseRemoteProcessCreated(CfrRenderProcessHandler renderProcessHandler)
+        {
             var ev = RemoteProcessCreated;
-            if(ev != null) {
+            if (ev != null)
+            {
                 ev(new RemoteProcessCreatedEventArgs(renderProcessHandler));
             }
         }
 
         [Obsolete("OnRemoteContextCreated is deprecated, use RemoteProcessCreated instead.")]
         public static event OnRemoteContextCreatedEventHandler OnRemoteContextCreated;
-        internal static void RaiseOnRemoteContextCreated() {
+        internal static void RaiseOnRemoteContextCreated()
+        {
             var handler = OnRemoteContextCreated;
-            if(handler != null) {
+            if (handler != null)
+            {
                 handler(EventArgs.Empty);
             }
         }
@@ -114,7 +129,8 @@ namespace Chromium.WebBrowser {
         /// The application can change initialization settings by handling
         /// the OnBeforeCfxInitialize event.
         /// </summary>
-        public static void Initialize() {
+        public static void Initialize()
+        {
             BrowserProcess.Initialize();
         }
 
@@ -122,7 +138,8 @@ namespace Chromium.WebBrowser {
         /// This function should be called on the main application thread to shut down
         /// the CEF browser process before the application exits.
         /// </summary>
-        public static void Shutdown() {
+        public static void Shutdown()
+        {
             CfxRuntime.Shutdown();
         }
 
@@ -130,8 +147,10 @@ namespace Chromium.WebBrowser {
         /// The CfxBrowserProcessHandler for this browser process.
         /// Do not access this property before calling ChromiumWebBrowser.Initialize()
         /// </summary>
-        public static CfxBrowserProcessHandler BrowserProcessHandler {
-            get {
+        public static CfxBrowserProcessHandler BrowserProcessHandler
+        {
+            get
+            {
                 return BrowserProcess.processHandler;
             }
         }
@@ -140,30 +159,38 @@ namespace Chromium.WebBrowser {
         /// Returns the ChromiumWebBrowser object associated with  the given CfxBrowser, or null
         /// if the CfxBrowser is not associated with any ChromiumWebBrowser object.
         /// </summary>
-        public static ChromiumWebBrowser FromCfxBrowser(CfxBrowser cfxBrowser) {
-            if(cfxBrowser == null) throw new ArgumentNullException("cfxBrowser");
+        public static ChromiumWebBrowser FromCfxBrowser(CfxBrowser cfxBrowser)
+        {
+            if (cfxBrowser == null) throw new ArgumentNullException("cfxBrowser");
             return GetBrowser(cfxBrowser.Identifier);
         }
 
         private static readonly Dictionary<int, WeakReference> browsers = new Dictionary<int, WeakReference>();
 
-        internal static ChromiumWebBrowser GetBrowser(int id) {
-            lock(browsers) {
+        internal static ChromiumWebBrowser GetBrowser(int id)
+        {
+            lock (browsers)
+            {
                 WeakReference r;
-                if(browsers.TryGetValue(id, out r)) {
+                if (browsers.TryGetValue(id, out r))
+                {
                     return (ChromiumWebBrowser)r.Target;
                 }
                 return null;
             }
         }
 
-        private static void AddToBrowserCache(ChromiumWebBrowser wb) {
-            lock(browsers) {
+        private static void AddToBrowserCache(ChromiumWebBrowser wb)
+        {
+            lock (browsers)
+            {
                 var deadRefs = new List<int>(browsers.Count);
-                foreach(var b in browsers) {
-                    if(!b.Value.IsAlive) deadRefs.Add(b.Key);
+                foreach (var b in browsers)
+                {
+                    if (!b.Value.IsAlive) deadRefs.Add(b.Key);
                 }
-                foreach(var r in deadRefs) {
+                foreach (var r in deadRefs)
+                {
                     browsers.Remove(r);
                 }
                 browsers[wb.Browser.Identifier] = new WeakReference(wb);
@@ -202,8 +229,10 @@ namespace Chromium.WebBrowser {
         /// Depends on the invoke mode. If the invoke mode is set to
         /// "Inherit", then "Invoke" will be assumed.
         /// </summary>
-        public bool RemoteCallbacksWillInvoke {
-            get {
+        public bool RemoteCallbacksWillInvoke
+        {
+            get
+            {
                 return RemoteCallbackInvokeMode != JSInvokeMode.DontInvoke;
             }
         }
@@ -246,9 +275,11 @@ namespace Chromium.WebBrowser {
         /// If createImmediately is true, then the underlying CfxBrowser is 
         /// created immediately with the default CfxRequestContext.
         /// </summary>
-        public ChromiumWebBrowser(string initialUrl, bool createImmediately) {
+        public ChromiumWebBrowser(string initialUrl, bool createImmediately)
+        {
 
-            if(BrowserProcess.initialized) {
+            if (BrowserProcess.initialized)
+            {
 
                 SetStyle(ControlStyles.ContainerControl
                     | ControlStyles.ResizeRedraw
@@ -271,7 +302,7 @@ namespace Chromium.WebBrowser {
                     | ControlStyles.Selectable
                     , true);
 
-                if(initialUrl == null)
+                if (initialUrl == null)
                     this.initialUrl = "about:blank";
                 else
                     this.initialUrl = initialUrl;
@@ -281,10 +312,12 @@ namespace Chromium.WebBrowser {
                 GlobalObject = new JSObject();
                 GlobalObject.SetBrowser("window", this);
 
-                if(createImmediately)
+                if (createImmediately)
                     CreateBrowser();
 
-            } else {
+            }
+            else
+            {
                 BackColor = System.Drawing.Color.White;
                 Width = 200;
                 Height = 160;
@@ -300,7 +333,8 @@ namespace Chromium.WebBrowser {
         /// This method should only be called if this ChromiumWebBrowser
         /// was instanciated with createImmediately == false.
         /// </summary>
-        public void CreateBrowser() {
+        public void CreateBrowser()
+        {
             CreateBrowser((CfxRequestContext)null);
         }
 
@@ -310,7 +344,8 @@ namespace Chromium.WebBrowser {
         /// This method should only be called if this ChromiumWebBrowser
         /// was instanciated with createImmediately == false.
         /// </summary>
-        public void CreateBrowser(string initialUrl) {
+        public void CreateBrowser(string initialUrl)
+        {
             this.initialUrl = initialUrl;
             CreateBrowser((CfxRequestContext)null);
         }
@@ -321,7 +356,8 @@ namespace Chromium.WebBrowser {
         /// This method should only be called if this ChromiumWebBrowser
         /// was instanciated with createImmediately == false.
         /// </summary>
-        public void CreateBrowser(string initialUrl, CfxRequestContext requestContext) {
+        public void CreateBrowser(string initialUrl, CfxRequestContext requestContext)
+        {
             this.initialUrl = initialUrl;
             CreateBrowser(requestContext);
         }
@@ -331,10 +367,12 @@ namespace Chromium.WebBrowser {
         /// This method should only be called if this ChromiumWebBrowser
         /// was instanciated with createImmediately == false.
         /// </summary>
-        public void CreateBrowser(CfxRequestContext requestContext) {
+        public void CreateBrowser(CfxRequestContext requestContext)
+        {
 
             // avoid illegal cross-thread calls
-            if(InvokeRequired) {
+            if (InvokeRequired)
+            {
                 Invoke((MethodInvoker)(() => CreateBrowser(requestContext)));
                 return;
             }
@@ -344,7 +382,7 @@ namespace Chromium.WebBrowser {
             // the browser must be created with a disabled child window.
             windowInfo.SetAsDisabledChild(Handle);
 
-            if(!CfxBrowserHost.CreateBrowser(windowInfo, client, initialUrl, DefaultBrowserSettings, requestContext))
+            if (!CfxBrowserHost.CreateBrowser(windowInfo, client, initialUrl, DefaultBrowserSettings, requestContext))
                 throw new ChromiumWebBrowserException("Failed to create browser instance.");
         }
 
@@ -425,9 +463,11 @@ namespace Chromium.WebBrowser {
         /// <summary>
         /// Returns the URL currently loaded in the main frame.
         /// </summary>
-        public System.Uri Url {
-            get {
-                if(Browser == null) return null;
+        public System.Uri Url
+        {
+            get
+            {
+                if (Browser == null) return null;
                 Uri retval;
                 Uri.TryCreate(Browser.MainFrame.Url, UriKind.RelativeOrAbsolute, out retval);
                 return retval;
@@ -452,24 +492,30 @@ namespace Chromium.WebBrowser {
         /// <summary>
         /// Navigate backwards.
         /// </summary>
-        public void GoBack() { if(Browser != null) Browser.GoBack(); }
+        public void GoBack() { if (Browser != null) Browser.GoBack(); }
 
         /// <summary>
         /// Navigate forwards.
         /// </summary>
-        public void GoForward() { if(Browser != null) Browser.GoForward(); }
+        public void GoForward() { if (Browser != null) Browser.GoForward(); }
 
         /// <summary>
         /// Load the specified |url| into the main frame.
         /// </summary>
-        public void LoadUrl(string url) {
-            if(Browser != null)
+        public void LoadUrl(string url)
+        {
+            if (Browser != null)
                 Browser.MainFrame.LoadUrl(url);
-            else {
-                lock(browserSyncRoot) {
-                    if(Browser != null) {
+            else
+            {
+                lock (browserSyncRoot)
+                {
+                    if (Browser != null)
+                    {
                         Browser.MainFrame.LoadUrl(url);
-                    } else {
+                    }
+                    else
+                    {
                         m_loadUrlDeferred = url;
                     }
                 }
@@ -481,14 +527,22 @@ namespace Chromium.WebBrowser {
         /// should have a standard scheme (for example, http scheme) or behaviors like
         /// link clicks and web security restrictions may not behave as expected.
         /// </summary>
-        public void LoadString(string stringVal, string url) {
-            if(Browser != null) {
+        public void LoadString(string stringVal, string url)
+        {
+            if (Browser != null)
+            {
                 Browser.MainFrame.LoadString(stringVal, url);
-            } else {
-                lock(browserSyncRoot) {
-                    if(Browser != null) {
+            }
+            else
+            {
+                lock (browserSyncRoot)
+                {
+                    if (Browser != null)
+                    {
                         Browser.MainFrame.LoadString(stringVal, url);
-                    } else {
+                    }
+                    else
+                    {
                         m_loadUrlDeferred = url;
                         m_loadStringDeferred = stringVal;
                     }
@@ -499,7 +553,8 @@ namespace Chromium.WebBrowser {
         /// <summary>
         /// Load the contents of |stringVal| with dummy url about:blank.
         /// </summary>
-        public void LoadString(string stringVal) {
+        public void LoadString(string stringVal)
+        {
             LoadString(stringVal, "about:blank");
         }
 
@@ -515,11 +570,13 @@ namespace Chromium.WebBrowser {
         /// Returns the identifier for this find operation (see also CfxFindHandler),
         /// or -1 if the browser has not yet been created.
         /// </summary>
-        public int Find(string searchText, bool forward, bool matchCase) {
-            if(BrowserHost == null)
+        public int Find(string searchText, bool forward, bool matchCase)
+        {
+            if (BrowserHost == null)
                 return -1;
             var findNext = currentFindText == searchText && currentMatchCase == matchCase;
-            if(!findNext) {
+            if (!findNext)
+            {
                 currentFindText = searchText;
                 currentMatchCase = matchCase;
                 ++findId;
@@ -535,7 +592,8 @@ namespace Chromium.WebBrowser {
         /// Returns the identifier for this find operation (see also CfxFindHandler),
         /// or -1 if the browser has not yet been created.
         /// </summary>
-        public int Find(string searchText, bool forward) {
+        public int Find(string searchText, bool forward)
+        {
             return Find(searchText, forward, false);
         }
 
@@ -544,7 +602,8 @@ namespace Chromium.WebBrowser {
         /// Returns the identifier for this find operation (see also CfxFindHandler),
         /// or -1 if the browser has not yet been created.
         /// </summary>
-        public int Find(string searchText) {
+        public int Find(string searchText)
+        {
             return Find(searchText, true, false);
         }
 
@@ -554,9 +613,11 @@ namespace Chromium.WebBrowser {
         /// <summary>
         /// Get the find toolbar of this browser window.
         /// </summary>
-        public FindToolbar FindToolbar {
-            get {
-                if(m_findToolbar == null)
+        public FindToolbar FindToolbar
+        {
+            get
+            {
+                if (m_findToolbar == null)
                     m_findToolbar = new FindToolbar(this);
                 return m_findToolbar;
             }
@@ -568,11 +629,15 @@ namespace Chromium.WebBrowser {
         /// Execution is asynchronous, this function returns immediately.
         /// Returns false if the browser has not yet been created.
         /// </summary>
-        public bool ExecuteJavascript(string code) {
-            if(Browser != null) {
+        public bool ExecuteJavascript(string code)
+        {
+            if (Browser != null)
+            {
                 Browser.MainFrame.ExecuteJavaScript(code, null, 0);
                 return true;
-            } else {
+            }
+            else
+            {
                 return false;
             }
         }
@@ -586,11 +651,15 @@ namespace Chromium.WebBrowser {
         /// Execution is asynchronous, this function returns immediately.
         /// Returns false if the browser has not yet been created.
         /// </summary>
-        public bool ExecuteJavascript(string code, string scriptUrl, int startLine) {
-            if(Browser != null) {
+        public bool ExecuteJavascript(string code, string scriptUrl, int startLine)
+        {
+            if (Browser != null)
+            {
                 Browser.MainFrame.ExecuteJavaScript(code, scriptUrl, startLine);
                 return true;
-            } else {
+            }
+            else
+            {
                 return false;
             }
         }
@@ -604,13 +673,15 @@ namespace Chromium.WebBrowser {
         /// 2) You need to Invoke on the webbrowser control and
         /// 3) The invoked code needs to call into the render process.
         /// </summary>
-        public Object RenderThreadInvoke(Delegate method, params Object[] args) {
+        public Object RenderThreadInvoke(Delegate method, params Object[] args)
+        {
 
-            if(!CfxRemoteCallContext.IsInContext) {
+            if (!CfxRemoteCallContext.IsInContext)
+            {
                 throw new ChromiumWebBrowserException("Can't use RenderThreadInvoke without being in the scope of a render process callback.");
             }
 
-            if(!InvokeRequired)
+            if (!InvokeRequired)
                 return method.DynamicInvoke(args);
 
             object retval = null;
@@ -621,14 +692,20 @@ namespace Chromium.WebBrowser {
             // We want exceptions to be thrown in place.
 
             var waitLock = new object();
-            lock(waitLock) {
-                BeginInvoke((MethodInvoker)(() => {
+            lock (waitLock)
+            {
+                BeginInvoke((MethodInvoker)(() =>
+                {
                     context.Enter();
-                    try {
+                    try
+                    {
                         retval = method.DynamicInvoke(args);
-                    } finally {
+                    }
+                    finally
+                    {
                         context.Exit();
-                        lock(waitLock) {
+                        lock (waitLock)
+                        {
                             Monitor.PulseAll(waitLock);
                         }
                     }
@@ -647,13 +724,16 @@ namespace Chromium.WebBrowser {
         /// 2) You need to Invoke on the webbrowser control and
         /// 3) The invoked code needs to call into the render process.
         /// </summary>
-        public void RenderThreadInvoke(MethodInvoker method) {
+        public void RenderThreadInvoke(MethodInvoker method)
+        {
 
-            if(!CfxRemoteCallContext.IsInContext) {
+            if (!CfxRemoteCallContext.IsInContext)
+            {
                 throw new ChromiumWebBrowserException("Can't use RenderThreadInvoke without being in the scope of a render process callback.");
             }
 
-            if(!InvokeRequired) {
+            if (!InvokeRequired)
+            {
                 method.Invoke();
                 return;
             }
@@ -665,14 +745,20 @@ namespace Chromium.WebBrowser {
             // We want exceptions to be thrown in place.
 
             var waitLock = new object();
-            lock(waitLock) {
-                BeginInvoke((MethodInvoker)(() => {
+            lock (waitLock)
+            {
+                BeginInvoke((MethodInvoker)(() =>
+                {
                     context.Enter();
-                    try {
+                    try
+                    {
                         method.Invoke();
-                    } finally {
+                    }
+                    finally
+                    {
                         context.Exit();
-                        lock(waitLock) {
+                        lock (waitLock)
+                        {
                             Monitor.PulseAll(waitLock);
                         }
                     }
@@ -702,7 +788,8 @@ namespace Chromium.WebBrowser {
         /// seems to be broken in some cases (see also issue #65).
         /// 
         /// </summary>
-        public bool EvaluateJavascript(string code, Action<CfrV8Value, CfrV8Exception> callback) {
+        public bool EvaluateJavascript(string code, Action<CfrV8Value, CfrV8Exception> callback)
+        {
             return EvaluateJavascript(code, JSInvokeMode.Inherit, callback);
         }
 
@@ -729,65 +816,85 @@ namespace Chromium.WebBrowser {
         /// seems to be broken in some cases (see also issue #65).
         /// 
         /// </summary>
-        public bool EvaluateJavascript(string code, JSInvokeMode invokeMode, Action<CfrV8Value, CfrV8Exception> callback) {
+        public bool EvaluateJavascript(string code, JSInvokeMode invokeMode, Action<CfrV8Value, CfrV8Exception> callback)
+        {
             var rb = remoteBrowser;
-            if(rb == null) return false;
-            try {
+            if (rb == null) return false;
+            try
+            {
                 var ctx = rb.CreateRemoteCallContext();
                 ctx.Enter();
-                try {
+                try
+                {
                     var taskRunner = CfrTaskRunner.GetForThread(CfxThreadId.Renderer);
                     var task = new EvaluateTask(this, code, invokeMode, callback);
                     taskRunner.PostTask(task);
                     return true;
-                } finally {
+                }
+                finally
+                {
                     ctx.Exit();
                 }
-            } catch(CfxRemotingException) {
+            }
+            catch (CfxRemotingException)
+            {
                 return false;
             }
         }
 
-        private class EvaluateTask : CfrTask {
+        private class EvaluateTask : CfrTask
+        {
 
             ChromiumWebBrowser wb;
             string code;
             JSInvokeMode invokeMode;
             Action<CfrV8Value, CfrV8Exception> callback;
 
-            internal EvaluateTask(ChromiumWebBrowser wb, string code, JSInvokeMode invokeMode, Action<CfrV8Value, CfrV8Exception> callback) {
+            internal EvaluateTask(ChromiumWebBrowser wb, string code, JSInvokeMode invokeMode, Action<CfrV8Value, CfrV8Exception> callback)
+            {
                 this.wb = wb;
                 this.code = code;
                 this.invokeMode = invokeMode;
                 this.callback = callback;
-                Execute += (s, e) => {
-                    if(invokeMode == JSInvokeMode.Invoke || (invokeMode == JSInvokeMode.Inherit && wb.RemoteCallbacksWillInvoke))
+                Execute += (s, e) =>
+                {
+                    if (invokeMode == JSInvokeMode.Invoke || (invokeMode == JSInvokeMode.Inherit && wb.RemoteCallbacksWillInvoke))
                         wb.RenderThreadInvoke(() => Task_Execute(e));
                     else
                         Task_Execute(e);
                 };
             }
 
-            void Task_Execute(CfrEventArgs e) {
+            void Task_Execute(CfrEventArgs e)
+            {
                 CfrV8Context context;
                 CfrV8Value retval;
                 CfrV8Exception ex;
                 bool result = false;
-                try {
+                try
+                {
                     context = wb.remoteBrowser.MainFrame.V8Context;
                     result = context.Eval(code, null, 0, out retval, out ex);
-                } catch {
+                }
+                catch
+                {
                     callback(null, null);
                     return;
                 }
                 context.Enter();
-                try {
-                    if(result) {
+                try
+                {
+                    if (result)
+                    {
                         callback(retval, null);
-                    } else {
+                    }
+                    else
+                    {
                         callback(null, ex);
                     }
-                } finally {
+                }
+                finally
+                {
                     context.Exit();
                 }
             }
@@ -807,9 +914,11 @@ namespace Chromium.WebBrowser {
         /// after the next time a V8 context is created in the render process
         /// of this browser for a frame with this name.
         /// </summary>
-        public JSObject GlobalObjectForFrame(string frameName) {
+        public JSObject GlobalObjectForFrame(string frameName)
+        {
             JSObject obj;
-            if(!frameGlobalObjects.TryGetValue(frameName, out obj)) {
+            if (!frameGlobalObjects.TryGetValue(frameName, out obj))
+            {
                 obj = new JSObject();
                 obj.SetBrowser("window", this);
                 frameGlobalObjects.Add(frameName, obj);
@@ -837,45 +946,56 @@ namespace Chromium.WebBrowser {
         /// </summary>
         /// <param name="callback"></param>
         /// <returns></returns>
-        public bool VisitDom(Action<CfrDomDocument, CfrBrowser> callback) {
+        public bool VisitDom(Action<CfrDomDocument, CfrBrowser> callback)
+        {
             var rb = remoteBrowser;
-            if(rb == null) return false;
-            try {
+            if (rb == null) return false;
+            try
+            {
                 var ctx = rb.CreateRemoteCallContext();
                 ctx.Enter();
-                try {
+                try
+                {
                     var taskRunner = CfrTaskRunner.GetForThread(CfxThreadId.Renderer);
                     var task = new VisitDomTask(this, callback);
                     taskRunner.PostTask(task);
                     return true;
-                } finally {
+                }
+                finally
+                {
                     ctx.Exit();
                 }
-            } catch(CfxRemotingException) {
+            }
+            catch (CfxRemotingException)
+            {
                 return false;
             }
         }
 
-        private class VisitDomTask : CfrTask {
+        private class VisitDomTask : CfrTask
+        {
 
             ChromiumWebBrowser wb;
             Action<CfrDomDocument, CfrBrowser> callback;
             CfrDomVisitor visitor;
 
-            internal VisitDomTask(ChromiumWebBrowser wb, Action<CfrDomDocument, CfrBrowser> callback) {
+            internal VisitDomTask(ChromiumWebBrowser wb, Action<CfrDomDocument, CfrBrowser> callback)
+            {
                 this.wb = wb;
                 this.callback = callback;
                 this.Execute += Task_Execute;
                 visitor = new CfrDomVisitor();
-                visitor.Visit += (s, e) => {
-                    if(wb.RemoteCallbacksWillInvoke)
+                visitor.Visit += (s, e) =>
+                {
+                    if (wb.RemoteCallbacksWillInvoke)
                         wb.RenderThreadInvoke((MethodInvoker)(() => { callback(e.Document, wb.remoteBrowser); }));
                     else
                         callback(e.Document, wb.remoteBrowser);
                 };
             }
 
-            void Task_Execute(object sender, CfrEventArgs e) {
+            void Task_Execute(object sender, CfrEventArgs e)
+            {
                 wb.remoteBrowser.MainFrame.VisitDom(visitor);
             }
         }
@@ -902,10 +1022,11 @@ namespace Chromium.WebBrowser {
         /// </remarks>
         public event CfrOnContextCreatedEventHandler OnV8ContextCreated;
 
-        internal void RaiseOnV8ContextCreated(CfrOnContextCreatedEventArgs e) {
+        internal void RaiseOnV8ContextCreated(CfrOnContextCreatedEventArgs e)
+        {
             var eventHandler = OnV8ContextCreated;
-            if(eventHandler == null) return;
-            if(RemoteCallbacksWillInvoke)
+            if (eventHandler == null) return;
+            if (RemoteCallbacksWillInvoke)
                 RenderThreadInvoke(() => eventHandler(this, e));
             else
                 eventHandler(this, e);
@@ -922,7 +1043,8 @@ namespace Chromium.WebBrowser {
         /// </summary>
         /// <param name="url"></param>
         /// <param name="resource"></param>
-        public void SetWebResource(string url, WebResource resource) {
+        public void SetWebResource(string url, WebResource resource)
+        {
             webResources[url] = resource;
         }
 
@@ -930,7 +1052,8 @@ namespace Chromium.WebBrowser {
         /// Remove a resource previously set for the specified URL.
         /// </summary>
         /// <param name="url"></param>
-        public void RemoveWebResource(string url) {
+        public void RemoveWebResource(string url)
+        {
             webResources.Remove(url);
         }
 
@@ -951,9 +1074,11 @@ namespace Chromium.WebBrowser {
         /// </summary>
         public event RemoteBrowserCreatedEventHandler RemoteBrowserCreated;
 
-        private void InvokeCallback(MethodInvoker method) {
+        private void InvokeCallback(MethodInvoker method)
+        {
 
-            if(!InvokeRequired) {
+            if (!InvokeRequired)
+            {
                 method.Invoke();
                 return;
             }
@@ -963,12 +1088,18 @@ namespace Chromium.WebBrowser {
             // We want exceptions to be thrown in place.
 
             var waitLock = new object();
-            lock(waitLock) {
-                BeginInvoke((MethodInvoker)(() => {
-                    try {
+            lock (waitLock)
+            {
+                BeginInvoke((MethodInvoker)(() =>
+                {
+                    try
+                    {
                         method.Invoke();
-                    } finally {
-                        lock(waitLock) {
+                    }
+                    finally
+                    {
+                        lock (waitLock)
+                        {
                             Monitor.PulseAll(waitLock);
                         }
                     }
@@ -978,81 +1109,102 @@ namespace Chromium.WebBrowser {
         }
 
         [Obsolete("OnLoadingStateChange is deprecated. Please use LoadHandler.OnLoadingStateChange and check for invalid cross-thread operations.")]
-        public event CfxOnLoadingStateChangeEventHandler OnLoadingStateChange {
-            add {
-                lock(browserSyncRoot) {
-                    if(m_OnLoadingStateChange == null)
+        public event CfxOnLoadingStateChangeEventHandler OnLoadingStateChange
+        {
+            add
+            {
+                lock (browserSyncRoot)
+                {
+                    if (m_OnLoadingStateChange == null)
                         client.LoadHandler.OnLoadingStateChange += RaiseOnLoadingStateChange;
                     m_OnLoadingStateChange += value;
                 }
             }
-            remove {
-                lock(browserSyncRoot) {
+            remove
+            {
+                lock (browserSyncRoot)
+                {
                     m_OnLoadingStateChange -= value;
-                    if(m_OnLoadingStateChange == null)
+                    if (m_OnLoadingStateChange == null)
                         client.LoadHandler.OnLoadingStateChange -= RaiseOnLoadingStateChange;
                 }
             }
         }
 
         private CfxOnLoadingStateChangeEventHandler m_OnLoadingStateChange;
-        private void RaiseOnLoadingStateChange(object sender, CfxOnLoadingStateChangeEventArgs e) {
+        private void RaiseOnLoadingStateChange(object sender, CfxOnLoadingStateChangeEventArgs e)
+        {
             var handler = m_OnLoadingStateChange;
-            if(handler != null) {
+            if (handler != null)
+            {
                 InvokeCallback(() => { handler(this, e); });
             }
         }
 
 
         [Obsolete("OnBeforeContextMenu is deprecated. Please use ContextMenuHandler.OnBeforeContextMenu and check for invalid cross-thread operations.")]
-        public event CfxOnBeforeContextMenuEventHandler OnBeforeContextMenu {
-            add {
-                lock(browserSyncRoot) {
-                    if(m_OnBeforeContextMenu == null)
+        public event CfxOnBeforeContextMenuEventHandler OnBeforeContextMenu
+        {
+            add
+            {
+                lock (browserSyncRoot)
+                {
+                    if (m_OnBeforeContextMenu == null)
                         client.ContextMenuHandler.OnBeforeContextMenu += RaiseOnBeforeContextMenu;
                     m_OnBeforeContextMenu += value;
                 }
             }
-            remove {
-                lock(browserSyncRoot) {
+            remove
+            {
+                lock (browserSyncRoot)
+                {
                     m_OnBeforeContextMenu -= value;
-                    if(m_OnBeforeContextMenu == null)
+                    if (m_OnBeforeContextMenu == null)
                         client.ContextMenuHandler.OnBeforeContextMenu -= RaiseOnBeforeContextMenu;
                 }
             }
         }
 
         private CfxOnBeforeContextMenuEventHandler m_OnBeforeContextMenu;
-        private void RaiseOnBeforeContextMenu(object sender, CfxOnBeforeContextMenuEventArgs e) {
+        private void RaiseOnBeforeContextMenu(object sender, CfxOnBeforeContextMenuEventArgs e)
+        {
             var handler = m_OnBeforeContextMenu;
-            if(handler != null) {
+            if (handler != null)
+            {
                 InvokeCallback(() => { handler(this, e); });
             }
         }
 
 
         [Obsolete("OnContextMenuCommand is deprecated. Please use ContextMenuHandler.OnContextMenuCommand and check for invalid cross-thread operations.")]
-        public event CfxOnContextMenuCommandEventHandler OnContextMenuCommand {
-            add {
-                lock(browserSyncRoot) {
-                    if(m_OnContextMenuCommand == null)
+        public event CfxOnContextMenuCommandEventHandler OnContextMenuCommand
+        {
+            add
+            {
+                lock (browserSyncRoot)
+                {
+                    if (m_OnContextMenuCommand == null)
                         client.ContextMenuHandler.OnContextMenuCommand += RaiseOnContextMenuCommand;
                     m_OnContextMenuCommand += value;
                 }
             }
-            remove {
-                lock(browserSyncRoot) {
+            remove
+            {
+                lock (browserSyncRoot)
+                {
                     m_OnContextMenuCommand -= value;
-                    if(m_OnContextMenuCommand == null)
+                    if (m_OnContextMenuCommand == null)
                         client.ContextMenuHandler.OnContextMenuCommand -= RaiseOnContextMenuCommand;
                 }
             }
         }
 
         private CfxOnContextMenuCommandEventHandler m_OnContextMenuCommand;
-        private void RaiseOnContextMenuCommand(object sender, CfxOnContextMenuCommandEventArgs e) {
+        private void RaiseOnContextMenuCommand(object sender, CfxOnContextMenuCommandEventArgs e)
+        {
             var handler = m_OnContextMenuCommand;
-            if(handler != null) {
+            if (handler != null)
+            {
                 InvokeCallback(() => { handler(this, e); });
             }
         }
@@ -1061,7 +1213,8 @@ namespace Chromium.WebBrowser {
         private string m_loadUrlDeferred;
         private string m_loadStringDeferred;
 
-        internal void OnBrowserCreated(CfxOnAfterCreatedEventArgs e) {
+        internal void OnBrowserCreated(CfxOnAfterCreatedEventArgs e)
+        {
 
             Browser = e.Browser;
             BrowserHost = Browser.Host;
@@ -1070,7 +1223,8 @@ namespace Chromium.WebBrowser {
             ResizeBrowserWindow();
 
             var handler = BrowserCreated;
-            if(handler != null) {
+            if (handler != null)
+            {
                 var e1 = new BrowserCreatedEventArgs(e.Browser);
                 handler(this, e1);
             }
@@ -1078,35 +1232,48 @@ namespace Chromium.WebBrowser {
             System.Threading.ThreadPool.QueueUserWorkItem(AfterSetBrowserTasks);
         }
 
-        private void AfterSetBrowserTasks(object state) {
-            lock(browserSyncRoot) {
-                if(m_loadUrlDeferred != null) {
-                    if(m_loadStringDeferred != null) {
+        private void AfterSetBrowserTasks(object state)
+        {
+            lock (browserSyncRoot)
+            {
+                if (m_loadUrlDeferred != null)
+                {
+                    if (m_loadStringDeferred != null)
+                    {
                         Browser.MainFrame.LoadString(m_loadStringDeferred, m_loadUrlDeferred);
-                    } else {
+                    }
+                    else
+                    {
                         Browser.MainFrame.LoadUrl(m_loadUrlDeferred);
                     }
                 }
             }
         }
 
-        internal void SetRemoteBrowser(CfrBrowser remoteBrowser, RenderProcess remoteProcess) {
+        internal void SetRemoteBrowser(CfrBrowser remoteBrowser, RenderProcess remoteProcess)
+        {
             this.remoteBrowser = remoteBrowser;
             this.remoteProcess = remoteProcess;
             remoteProcess.AddBrowserReference(this);
             var h = RemoteBrowserCreated;
-            if(h != null) {
+            if (h != null)
+            {
                 var e = new RemoteBrowserCreatedEventArgs(remoteBrowser);
-                if(RemoteCallbacksWillInvoke && InvokeRequired) {
+                if (RemoteCallbacksWillInvoke && InvokeRequired)
+                {
                     RenderThreadInvoke(() => { h(this, e); });
-                } else {
+                }
+                else
+                {
                     h(this, e);
                 }
             }
         }
 
-        internal void RemoteProcessExited(RenderProcess process) {
-            if(process == this.remoteProcess) {
+        internal void RemoteProcessExited(RenderProcess process)
+        {
+            if (process == this.remoteProcess)
+            {
                 this.remoteBrowser = null;
                 this.remoteProcess = null;
             }
@@ -1118,38 +1285,50 @@ namespace Chromium.WebBrowser {
         //    Debug.Print(m.ToString());
         //}
 
-        protected override void OnVisibleChanged(EventArgs e) {
+        protected override void OnVisibleChanged(EventArgs e)
+        {
             base.OnVisibleChanged(e);
             ResizeBrowserWindow();
-            if(Visible)
+            if (Visible)
                 Refresh();
         }
 
-        protected override void OnGotFocus(System.EventArgs e) {
+        protected override void OnGotFocus(System.EventArgs e)
+        {
             base.OnGotFocus(e);
-            if(BrowserHost != null) BrowserHost.SetFocus(true);
+            if (BrowserHost != null) BrowserHost.SetFocus(true);
         }
 
-        protected override void OnResize(System.EventArgs e) {
+        protected override void OnResize(System.EventArgs e)
+        {
             base.OnResize(e);
             ResizeBrowserWindow();
         }
 
 
 
-        internal void ResizeBrowserWindow() {
-            if(browserWindowHandle == IntPtr.Zero) return;
-            if(Visible && Height > 0 && Width > 0) {
+        internal void ResizeBrowserWindow()
+        {
+            if (browserWindowHandle == IntPtr.Zero) return;
+            if (Visible && Height > 0 && Width > 0)
+            {
                 int h;
-                if(m_findToolbar == null || !m_findToolbar.Visible) {
+                if (m_findToolbar == null || !m_findToolbar.Visible)
+                {
                     h = Height;
-                } else {
-                    if(InvokeRequired) {
-                        Invoke((MethodInvoker)(() => {
+                }
+                else
+                {
+                    if (InvokeRequired)
+                    {
+                        Invoke((MethodInvoker)(() =>
+                        {
                             m_findToolbar.Width = Width;
                             m_findToolbar.Top = Height - m_findToolbar.Height;
                         }));
-                    } else {
+                    }
+                    else
+                    {
                         m_findToolbar.Width = Width;
                         m_findToolbar.Top = Height - m_findToolbar.Height;
                     }
@@ -1158,7 +1337,9 @@ namespace Chromium.WebBrowser {
                 SetWindowLong(browserWindowHandle, -16, (int)(WindowStyle.WS_CHILD | WindowStyle.WS_CLIPCHILDREN | WindowStyle.WS_CLIPSIBLINGS | WindowStyle.WS_TABSTOP | WindowStyle.WS_VISIBLE));
                 SetWindowPos(browserWindowHandle, IntPtr.Zero, 0, 0, Width, h, SWP_NOMOVE | SWP_NOZORDER | SWP_SHOWWINDOW | SWP_NOCOPYBITS | SWP_ASYNCWINDOWPOS);
                 //Debug.Print($"ResizeBrowserWindow: {Width} {h}");
-            } else {
+            }
+            else
+            {
                 SetWindowLong(browserWindowHandle, -16, (int)(WindowStyle.WS_CHILD | WindowStyle.WS_CLIPCHILDREN | WindowStyle.WS_CLIPSIBLINGS | WindowStyle.WS_TABSTOP | WindowStyle.WS_DISABLED));
                 SetWindowPos(browserWindowHandle, IntPtr.Zero, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_HIDEWINDOW | SWP_ASYNCWINDOWPOS);
                 //Debug.Print($"ResizeBrowserWindow: hide");

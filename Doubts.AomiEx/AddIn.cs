@@ -151,6 +151,25 @@ namespace Doubts.AomiEx
             return null;
         }
 
+        public Stream FindResources(string resourceName)
+        {
+            foreach (Runtime runtime in runtimes)
+            {
+                if (!runtime.IsHostApplicationAssembly)
+                {
+                    LoadDependencies();
+                }
+
+                Stream stream = runtime.FindResources(resourceName);
+
+                if (stream != null)
+                {
+                    return stream;
+                }
+            }
+            return null;
+        }
+
         public void LoadRuntimeAssemblies()
         {
             LoadDependencies();

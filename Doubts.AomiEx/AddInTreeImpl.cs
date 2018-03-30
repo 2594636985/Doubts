@@ -45,7 +45,7 @@ namespace Doubts.AomiEx
         public AddInTreeImpl()
         {
             this.doozers.TryAdd("Class", new ClassDoozer());
-         
+
             //conditionEvaluators.TryAdd("Compare", new CompareConditionEvaluator());
             //conditionEvaluators.TryAdd("Ownerstate", new OwnerStateConditionEvaluator());
         }
@@ -60,7 +60,7 @@ namespace Doubts.AomiEx
             AddInTreeNode curPath = rootNode;
             for (int i = 0; i < splittedPath.Length; i++)
             {
-                if (!curPath.ChildNodes.TryGetValue(splittedPath[i], out curPath))
+                if (!curPath.ChildNodes.TryGetValue(splittedPath[i].ToUpper(), out curPath))
                 {
                     if (throwOnNotFound)
                         throw new AddInException(string.Format(StringResources.AddIn_TreePath_NotFound, path));
@@ -140,13 +140,14 @@ namespace Doubts.AomiEx
 
             while (i < splittedPath.Length)
             {
+                string keyValue = splittedPath[i]?.ToUpper();
 
-                if (!curPath.ChildNodes.ContainsKey(splittedPath[i]))
+                if (!curPath.ChildNodes.ContainsKey(keyValue))
                 {
-                    curPath.ChildNodes[splittedPath[i]] = new AddInTreeNode();
+                    curPath.ChildNodes[keyValue] = new AddInTreeNode();
                 }
 
-                curPath = curPath.ChildNodes[splittedPath[i]];
+                curPath = curPath.ChildNodes[keyValue];
 
                 ++i;
             }
