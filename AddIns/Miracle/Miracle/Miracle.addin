@@ -1,0 +1,23 @@
+﻿<AddIn name="Main"
+       author="Aomi"
+       copyright=""
+       description="Web主框"
+       addInManagerHidden = "preinstalled">
+
+  <Manifest>
+    <Identity name = "Miracle"/>
+  </Manifest>
+
+  <Runtime>
+    <Import assembly=":Doubts.AomiEx" />
+    <Import assembly=":Doubts.Framework" />
+    <Import assembly="Miracle.dll" />
+    <Import assembly="Miracle.Framwork.dll"/>
+  </Runtime>
+  
+
+  <Path name="/Doubts/WebProgram">
+    <Function id="Authorized" class="Miracle.Functions.AuthorizedFunction" />
+  </Path>
+
+</AddIn>
