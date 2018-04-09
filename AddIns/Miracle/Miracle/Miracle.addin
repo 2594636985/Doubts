@@ -15,9 +15,8 @@
     <Import assembly="Miracle.Framwork.dll"/>
   </Runtime>
   
-
   <Path name="/Doubts/WebProgram">
-    <Function id="Authorized" class="Miracle.Functions.AuthorizedFunction" />
+    <Function id="Authorized" class="Miracle.Functions.AuthorizedFunction"   />
   </Path>
 
 </AddIn>

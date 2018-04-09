@@ -8,6 +8,9 @@ using System.Xml;
 
 namespace Doubts.AomiEx
 {
+    /// <summary>
+    /// 插件类
+    /// </summary>
     public sealed class AddIn
     {
         private volatile bool dependenciesLoaded;

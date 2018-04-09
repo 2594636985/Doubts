@@ -2,7 +2,9 @@
 using Chromium.WebBrowser;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 
 namespace Doubts.WebFramework.DoUI
@@ -10,24 +12,16 @@ namespace Doubts.WebFramework.DoUI
     internal class LocalResourceHandler : CfxResourceHandler
     {
         private int readResponseStreamOffset;
-
-        string requestFile = null;
-
-        string requestUrl = null;
-
+        private string requestFile = null;
+        private string requestUrl = null;
         private WebResource webResource;
         private ChromiumWebBrowser browser;
-
-
-        private System.Runtime.InteropServices.GCHandle gcHandle;
+        private GCHandle gcHandle;
 
         internal LocalResourceHandler(ChromiumWebBrowser browser)
         {
-            gcHandle = System.Runtime.InteropServices.GCHandle.Alloc(this);
-
-
+            this.gcHandle = GCHandle.Alloc(this);
             this.browser = browser;
-
             this.GetResponseHeaders += LocalResourceHandler_GetResponseHeaders;
             this.ProcessRequest += LocalResourceHandler_ProcessRequest;
             this.ReadResponse += LocalResourceHandler_ReadResponse;
@@ -39,30 +33,30 @@ namespace Doubts.WebFramework.DoUI
         private void LocalResourceHandler_ProcessRequest(object sender, Chromium.Event.CfxProcessRequestEventArgs e)
         {
 
-            readResponseStreamOffset = 0;
+            this.readResponseStreamOffset = 0;
+
             var request = e.Request;
             var callback = e.Callback;
 
             var uri = new Uri(request.Url);
 
-            requestUrl = request.Url;
+            this.requestUrl = request.Url;
+
             var localPath = uri.LocalPath;
             if (localPath.StartsWith("/"))
                 localPath = $".{localPath}";
 
             var fileName = System.IO.Path.GetFullPath(localPath);
 
+            this.requestFile = request.Url;
 
-            requestFile = request.Url;
-
-
-            if (System.IO.File.Exists(fileName))
+            if (File.Exists(fileName))
             {
-                using (var stream = System.IO.File.OpenRead(fileName))
-                using (var reader = new System.IO.BinaryReader(stream))
+                using (var stream = File.OpenRead(fileName))
+                using (var reader = new BinaryReader(stream))
                 {
                     var buff = reader.ReadBytes((int)reader.BaseStream.Length);
-                    webResource = new WebResource(buff, MimeHelper.GetMimeType(System.IO.Path.GetExtension(fileName)));
+                    webResource = new WebResource(buff, MimeHelper.GetMimeType(Path.GetExtension(fileName)));
 
                     reader.Close();
                     stream.Close();
@@ -106,11 +100,16 @@ namespace Doubts.WebFramework.DoUI
         private void LocalResourceHandler_ReadResponse(object sender, Chromium.Event.CfxReadResponseEventArgs e)
         {
             int bytesToCopy = webResource.data.Length - readResponseStreamOffset;
+
             if (bytesToCopy > e.BytesToRead)
                 bytesToCopy = e.BytesToRead;
-            System.Runtime.InteropServices.Marshal.Copy(webResource.data, readResponseStreamOffset, e.DataOut, bytesToCopy);
+
+            Marshal.Copy(webResource.data, readResponseStreamOffset, e.DataOut, bytesToCopy);
+
             e.BytesRead = bytesToCopy;
+
             readResponseStreamOffset += bytesToCopy;
+
             e.SetReturnValue(true);
 
 

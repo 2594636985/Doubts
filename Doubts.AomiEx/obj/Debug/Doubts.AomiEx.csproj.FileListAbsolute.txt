@@ -18,3 +18,4 @@ D:\Job\Dev\Doubts\Doubts.AomiEx\obj\Debug\Doubts.AomiEx.Properties.StringResourc
 D:\Job\Dev\Doubts\Doubts.AomiEx\obj\Debug\Doubts.AomiEx.csproj.GenerateResource.Cache
 D:\Job\Dev\Doubts\Doubts.AomiEx\obj\Debug\Doubts.AomiEx.dll
 D:\Job\Dev\Doubts\Doubts.AomiEx\obj\Debug\Doubts.AomiEx.pdb
+D:\Job\Dev\Doubts\Doubts.AomiEx\obj\Debug\Doubts.AomiEx.csprojResolveAssemblyReference.cache

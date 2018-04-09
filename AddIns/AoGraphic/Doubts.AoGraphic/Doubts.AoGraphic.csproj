@@ -107,6 +107,9 @@
   <ItemGroup>
     <Content Include="Images\ErrorImage.png" />
     <Content Include="Images\LoadImage.png" />
+    <Content Include="AoGraphic.addin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

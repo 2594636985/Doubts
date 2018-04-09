@@ -32,6 +32,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -44,6 +45,23 @@
     <Compile Include="DoozerImpl\FunctionDoozer.cs" />
     <Compile Include="DoozerImpl\HtmlDoozer.cs" />
     <Compile Include="DoozerImpl\RendererDoozer.cs" />
+    <Compile Include="DoubtsException.cs" />
+    <Compile Include="EL\AomiEL.cs" />
+    <Compile Include="EL\DefaultELAnalyzer.cs" />
+    <Compile Include="EL\ELCompiler.cs" />
+    <Compile Include="EL\ELException.cs" />
+    <Compile Include="EL\EnumerableExtensions.cs" />
+    <Compile Include="EL\ExpressionBuilder.cs" />
+    <Compile Include="EL\FunctionBuilder.cs" />
+    <Compile Include="EL\IELAnalyzer.cs" />
+    <Compile Include="EL\Parsers\Parser.cs" />
+    <Compile Include="EL\Parsers\PropertyParser.cs" />
+    <Compile Include="EL\Tokenizer.cs" />
+    <Compile Include="EL\Tokens\ExpressionToken.cs" />
+    <Compile Include="EL\Tokens\PropertyExpressionToken.cs" />
+    <Compile Include="EL\Tokens\Token.cs" />
+    <Compile Include="EL\Tokens\TokenType.cs" />
+    <Compile Include="Handler.cs" />
     <Compile Include="Function.cs" />
     <Compile Include="GlobalKeyboardHook.cs" />
     <Compile Include="Renderer.cs" />
@@ -60,6 +78,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>xcopy /y "$(SolutionDir)Doubts.Framework\Doubts.Framework.addin" "$(SolutionDir)Bin\Debug\AddIns\"</PostBuildEvent>

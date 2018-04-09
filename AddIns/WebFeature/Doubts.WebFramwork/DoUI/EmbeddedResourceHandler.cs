@@ -2,36 +2,30 @@
 using Chromium.WebBrowser;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Text;
 
 namespace Doubts.WebFramework.DoUI
 {
     internal class EmbeddedResourceHandler : CfxResourceHandler
     {
-
         private int readResponseStreamOffset;
         private Assembly resourceAssembly;
-
-        //string requestFile = null;
-
-        string requestUrl = null;
-
+        private string requestUrl = null;
         private WebResource webResource;
         private ChromiumWebBrowser browser;
-
-        private System.Runtime.InteropServices.GCHandle gcHandle;
+        private GCHandle gcHandle;
 
         private string domain = null;
 
         internal EmbeddedResourceHandler(Assembly resourceAssembly, ChromiumWebBrowser browser, string domain = null)
         {
-            gcHandle = System.Runtime.InteropServices.GCHandle.Alloc(this);
+            this.gcHandle = GCHandle.Alloc(this);
             this.domain = domain;
-
             this.browser = browser;
-
             this.resourceAssembly = resourceAssembly;
             this.GetResponseHeaders += EmbeddedResourceHandler_GetResponseHeaders;
             this.ProcessRequest += EmbeddedResourceHandler_ProcessRequest;
@@ -43,8 +37,8 @@ namespace Doubts.WebFramework.DoUI
 
         private void EmbeddedResourceHandler_ProcessRequest(object sender, Chromium.Event.CfxProcessRequestEventArgs e)
         {
-
             readResponseStreamOffset = 0;
+
             var request = e.Request;
             var callback = e.Callback;
 
@@ -54,7 +48,6 @@ namespace Doubts.WebFramework.DoUI
 
             var fileName = string.IsNullOrEmpty(domain) ? string.Format("{0}{1}", uri.Authority, uri.AbsolutePath) : uri.AbsolutePath;
 
-            //requestFile = uri.LocalPath;
             if (fileName.StartsWith("/") && fileName.Length > 1)
             {
                 fileName = fileName.Substring(1);
@@ -73,7 +66,6 @@ namespace Doubts.WebFramework.DoUI
 
             var resourcePath = string.Format("{0}.{1}", ass.GetName().Name, fileName.Replace('/', '.'));
 
-
             var resourceName = ass.GetManifestResourceNames().SingleOrDefault(p => p.Equals(resourcePath, StringComparison.CurrentCultureIgnoreCase));
 
             if (!string.IsNullOrEmpty(resourceName) && ass.GetManifestResourceInfo(resourceName) != null)
@@ -82,7 +74,7 @@ namespace Doubts.WebFramework.DoUI
                 {
                     var buff = reader.ReadBytes((int)reader.BaseStream.Length);
 
-                    webResource = new WebResource(buff, MimeHelper.GetMimeType(System.IO.Path.GetExtension(fileName)));
+                    webResource = new WebResource(buff, MimeHelper.GetMimeType(Path.GetExtension(fileName)));
 
                     reader.Close();
 
@@ -92,9 +84,7 @@ namespace Doubts.WebFramework.DoUI
                     }
                 }
 
-
                 Console.WriteLine($"[加载]:\t{requestUrl}");
-
 
                 callback.Continue();
                 e.SetReturnValue(true);
@@ -105,13 +95,7 @@ namespace Doubts.WebFramework.DoUI
 
                 callback.Continue();
                 e.SetReturnValue(false);
-
-
             }
-
-
-
-
         }
 
         private void EmbeddedResourceHandler_GetResponseHeaders(object sender, Chromium.Event.CfxGetResponseHeadersEventArgs e)

@@ -32,6 +32,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -57,6 +60,14 @@
       <Project>{252e717b-c35b-4126-938e-64714ed10650}</Project>
       <Name>Doubts.Framework</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Doubts.Log4net\Doubts.Log4net.csproj">
+      <Project>{395a9358-36a4-454c-b42e-7a2d911c33da}</Project>
+      <Name>Doubts.Log4net</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="app.manifest" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

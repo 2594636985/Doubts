@@ -8,6 +8,9 @@ using Doubts.AomiEx.Properties;
 
 namespace Doubts.AomiEx
 {
+    /// <summary>
+    /// 插件清单类
+    /// </summary>
     public class AddInManifest
     {
         private List<AddInReference> dependencies = new List<AddInReference>();
@@ -30,12 +33,17 @@ namespace Doubts.AomiEx
         {
             get { return identities; }
         }
-
+        /// <summary>
+        /// 发生冲突的插件
+        /// </summary>
         public ReadOnlyCollection<AddInReference> Conflicts
         {
             get { return conflicts.AsReadOnly(); }
         }
 
+        /// <summary>
+        /// 发生依懒的插件
+        /// </summary>
         public ReadOnlyCollection<AddInReference> Dependencies
         {
             get { return dependencies.AsReadOnly(); }

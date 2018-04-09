@@ -99,8 +99,7 @@ namespace Doubts.AomiEx
                             {
                                 if (addIn.Enabled && addIn.Manifest.Identities.ContainsKey(referencedAddIn))
                                 {
-                                    string assemblyFile = Path.Combine(Path.GetDirectoryName(addIn.FileName),
-                                                                       assembly.Substring(pos + 1));
+                                    string assemblyFile = Path.Combine(Path.GetDirectoryName(addIn.FileName), assembly.Substring(pos + 1));
                                     loadedAssembly = LoadAssemblyFrom(assemblyFile);
                                     break;
                                 }

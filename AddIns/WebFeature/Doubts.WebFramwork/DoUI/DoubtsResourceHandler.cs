@@ -5,6 +5,7 @@ using Doubts.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 
 namespace Doubts.WebFramework.DoUI
@@ -12,21 +13,15 @@ namespace Doubts.WebFramework.DoUI
     internal class DoubtsResourceHandler : CfxResourceHandler
     {
         private int readResponseStreamOffset;
-
-        string requestFile = null;
-
-        string requestUrl = null;
-
+        private string requestFile = null;
+        private string requestUrl = null;
         private WebResource webResource;
         private ChromiumWebBrowser browser;
-
-
-        private System.Runtime.InteropServices.GCHandle gcHandle;
+        private GCHandle gcHandle;
 
         internal DoubtsResourceHandler(ChromiumWebBrowser browser)
         {
-            gcHandle = System.Runtime.InteropServices.GCHandle.Alloc(this);
-
+            this.gcHandle = GCHandle.Alloc(this);
 
             this.browser = browser;
 
@@ -97,7 +92,7 @@ namespace Doubts.WebFramework.DoUI
             if (bytesToCopy > e.BytesToRead)
                 bytesToCopy = e.BytesToRead;
 
-            System.Runtime.InteropServices.Marshal.Copy(webResource.data, readResponseStreamOffset, e.DataOut, bytesToCopy);
+            Marshal.Copy(webResource.data, readResponseStreamOffset, e.DataOut, bytesToCopy);
 
             e.BytesRead = bytesToCopy;
 
@@ -108,6 +103,7 @@ namespace Doubts.WebFramework.DoUI
             if (readResponseStreamOffset == webResource.data.Length)
             {
                 gcHandle.Free();
+
                 Console.WriteLine($"[完成]:\t{requestUrl}");
             }
         }
