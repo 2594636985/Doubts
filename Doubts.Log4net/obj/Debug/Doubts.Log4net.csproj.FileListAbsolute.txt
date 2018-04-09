@@ -1,0 +1,5 @@
+D:\Job\Dev\Doubts\Doubts.Log4net\obj\Debug\Doubts.Log4net.csprojResolveAssemblyReference.cache
+D:\Job\Dev\Doubts\Doubts.Log4net\bin\Debug\Doubts.Log4net.dll
+D:\Job\Dev\Doubts\Doubts.Log4net\bin\Debug\Doubts.Log4net.pdb
+D:\Job\Dev\Doubts\Doubts.Log4net\obj\Debug\Doubts.Log4net.dll
+D:\Job\Dev\Doubts\Doubts.Log4net\obj\Debug\Doubts.Log4net.pdb

@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A6E252D4-A2C4-418C-A1FE-AA847E67873A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Doubts.AomiHtml</RootNamespace>
+    <AssemblyName>Doubts.AomiHtml</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BuiltinHelpers.cs" />
+    <Compile Include="Compiler\CompilationContext.cs" />
+    <Compile Include="Compiler\ExpressionBuilder.cs" />
+    <Compile Include="Compiler\FunctionBuilder.cs" />
+    <Compile Include="Compiler\HandlebarsCompiler.cs" />
+    <Compile Include="Compiler\HandlebarsCompilerException.cs" />
+    <Compile Include="Compiler\Lexer\Converter\BlockAccumulator.cs" />
+    <Compile Include="Compiler\Lexer\Converter\BlockAccumulators\BlockAccumulatorContext.cs" />
+    <Compile Include="Compiler\Lexer\Converter\BlockAccumulators\BlockHelperAccumulatorContext.cs" />
+    <Compile Include="Compiler\Lexer\Converter\BlockAccumulators\ConditionalBlockAccumulatorContext.cs" />
+    <Compile Include="Compiler\Lexer\Converter\BlockAccumulators\DeferredBlockAccumulatorContext.cs" />
+    <Compile Include="Compiler\Lexer\Converter\BlockAccumulators\IteratorBlockAccumulatorContext.cs" />
+    <Compile Include="Compiler\Lexer\Converter\BlockAccumulators\PartialBlockAccumulatorContext.cs" />
+    <Compile Include="Compiler\Lexer\Converter\CommentAndLayoutConverter.cs" />
+    <Compile Include="Compiler\Lexer\Converter\ExpressionScopeConverter.cs" />
+    <Compile Include="Compiler\Lexer\Converter\HashParametersConverter.cs" />
+    <Compile Include="Compiler\Lexer\Converter\HelperArgumentAccumulator.cs" />
+    <Compile Include="Compiler\Lexer\Converter\HelperConverter.cs" />
+    <Compile Include="Compiler\Lexer\Converter\LiteralConverter.cs" />
+    <Compile Include="Compiler\Lexer\Converter\PartialConverter.cs" />
+    <Compile Include="Compiler\Lexer\Converter\PathConverter.cs" />
+    <Compile Include="Compiler\Lexer\Converter\StaticConverter.cs" />
+    <Compile Include="Compiler\Lexer\Converter\SubExpressionConverter.cs" />
+    <Compile Include="Compiler\Lexer\Converter\TokenConverter.cs" />
+    <Compile Include="Compiler\Lexer\Converter\WhitespaceRemover.cs" />
+    <Compile Include="Compiler\Lexer\HandlebarsParserException.cs" />
+    <Compile Include="Compiler\Lexer\Parsers\BlockWordParser.cs" />
+    <Compile Include="Compiler\Lexer\Parsers\CommentParser.cs" />
+    <Compile Include="Compiler\Lexer\Parsers\LiteralParser.cs" />
+    <Compile Include="Compiler\Lexer\Parsers\Parser.cs" />
+    <Compile Include="Compiler\Lexer\Parsers\PartialParser.cs" />
+    <Compile Include="Compiler\Lexer\Parsers\WordParser.cs" />
+    <Compile Include="Compiler\Lexer\Tokenizer.cs" />
+    <Compile Include="Compiler\Lexer\Tokens\CommentToken.cs" />
+    <Compile Include="Compiler\Lexer\Tokens\EndExpressionToken.cs" />
+    <Compile Include="Compiler\Lexer\Tokens\EndSubExpressionToken.cs" />
+    <Compile Include="Compiler\Lexer\Tokens\ExpressionScopeToken.cs" />
+    <Compile Include="Compiler\Lexer\Tokens\ExpressionToken.cs" />
+    <Compile Include="Compiler\Lexer\Tokens\HashParameterToken.cs" />
+    <Compile Include="Compiler\Lexer\Tokens\LayoutToken.cs" />
+    <Compile Include="Compiler\Lexer\Tokens\LiteralExpressionToken.cs" />
+    <Compile Include="Compiler\Lexer\Tokens\PartialToken.cs" />
+    <Compile Include="Compiler\Lexer\Tokens\StartExpressionToken.cs" />
+    <Compile Include="Compiler\Lexer\Tokens\StartSubExpressionToken.cs" />
+    <Compile Include="Compiler\Lexer\Tokens\StaticToken.cs" />
+    <Compile Include="Compiler\Lexer\Tokens\Token.cs" />
+    <Compile Include="Compiler\Lexer\Tokens\TokenType.cs" />
+    <Compile Include="Compiler\Lexer\Tokens\WordExpressionToken.cs" />
+    <Compile Include="Compiler\Resolvers\IExpressionNameResolver.cs" />
+    <Compile Include="Compiler\Resolvers\UpperCamelCaseExpressionNameResolver.cs" />
+    <Compile Include="Compiler\Structure\BindingContext.cs" />
+    <Compile Include="Compiler\Structure\BlockHelperExpression.cs" />
+    <Compile Include="Compiler\Structure\BoolishExpression.cs" />
+    <Compile Include="Compiler\Structure\CommentExpression.cs" />
+    <Compile Include="Compiler\Structure\DeferredSectionExpression.cs" />
+    <Compile Include="Compiler\Structure\HandlebarsExpression.cs" />
+    <Compile Include="Compiler\Structure\HashParametersExpression.cs" />
+    <Compile Include="Compiler\Structure\HelperExpression.cs" />
+    <Compile Include="Compiler\Structure\IteratorExpression.cs" />
+    <Compile Include="Compiler\Structure\PartialExpression.cs" />
+    <Compile Include="Compiler\Structure\PathExpression.cs" />
+    <Compile Include="Compiler\Structure\StatementExpression.cs" />
+    <Compile Include="Compiler\Structure\StaticExpression.cs" />
+    <Compile Include="Compiler\Structure\SubExpressionExpression.cs" />
+    <Compile Include="Compiler\Structure\UndefinedBindingResult.cs" />
+    <Compile Include="Compiler\Translation\Expression\BlockHelperFunctionBinder.cs" />
+    <Compile Include="Compiler\Translation\Expression\BoolishConverter.cs" />
+    <Compile Include="Compiler\Translation\Expression\CommentVisitor.cs" />
+    <Compile Include="Compiler\Translation\Expression\ContextBinder.cs" />
+    <Compile Include="Compiler\Translation\Expression\DeferredSectionVisitor.cs" />
+    <Compile Include="Compiler\Translation\Expression\HandlebarsExpressionVisitor.cs" />
+    <Compile Include="Compiler\Translation\Expression\HandlebarsUndefinedBindingException.cs" />
+    <Compile Include="Compiler\Translation\Expression\HashParameterDictionary.cs" />
+    <Compile Include="Compiler\Translation\Expression\HelperFunctionBinder.cs" />
+    <Compile Include="Compiler\Translation\Expression\IteratorBinder.cs" />
+    <Compile Include="Compiler\Translation\Expression\PartialBinder.cs" />
+    <Compile Include="Compiler\Translation\Expression\PathBinder.cs" />
+    <Compile Include="Compiler\Translation\Expression\StaticReplacer.cs" />
+    <Compile Include="Compiler\Translation\Expression\SubExpressionVisitor.cs" />
+    <Compile Include="Compiler\Translation\Expression\UnencodedStatementVisitor.cs" />
+    <Compile Include="DescriptionAttribute.cs" />
+    <Compile Include="DynamicViewModel.cs" />
+    <Compile Include="EncodedTextWriter.cs" />
+    <Compile Include="EnumerableExtensions.cs" />
+    <Compile Include="Handlebars.cs" />
+    <Compile Include="HandlebarsConfiguration.cs" />
+    <Compile Include="HandlebarsEnvironment.cs" />
+    <Compile Include="HandlebarsException.cs" />
+    <Compile Include="HandlebarsExtensions.cs" />
+    <Compile Include="HandlebarsRuntimeException.cs" />
+    <Compile Include="HandlebarsUtils.cs" />
+    <Compile Include="HandlebarsViewEngine.cs" />
+    <Compile Include="HelperOptions.cs" />
+    <Compile Include="HtmlEncoder.cs" />
+    <Compile Include="IHandlebars.cs" />
+    <Compile Include="ISafeString.cs" />
+    <Compile Include="ITextEncoder.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

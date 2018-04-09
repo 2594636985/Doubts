@@ -1,0 +1,4 @@
+D:\Job\Dev\Doubts\AddIns\Miracle\Miralce.Framework\bin\Debug\Miralce.Framework.dll
+D:\Job\Dev\Doubts\AddIns\Miracle\Miralce.Framework\bin\Debug\Miralce.Framework.pdb
+D:\Job\Dev\Doubts\AddIns\Miracle\Miralce.Framework\obj\Debug\Miralce.Framework.dll
+D:\Job\Dev\Doubts\AddIns\Miracle\Miralce.Framework\obj\Debug\Miralce.Framework.pdb

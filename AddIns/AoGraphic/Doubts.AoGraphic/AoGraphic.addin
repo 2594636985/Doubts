@@ -1,0 +1,17 @@
+﻿<AddIn name="AoGraphic"
+       author="Aomi"
+       copyright=""
+       description="打印机功功模块"
+       addInManagerHidden = "preinstalled">
+
+  <Manifest>
+    <Identity name = "AoGraphic"/>
+  </Manifest>
+
+  <Runtime>
+    <Import assembly=":Doubts.AomiEx" />
+    <Import assembly=":Doubts.Framework" />
+    <Import assembly="Doubts.AoGraphic.dll" />
+  </Runtime>
+  
+</AddIn>
