@@ -9,8 +9,6 @@ namespace Doubts.Framework.EL.Tokens
     {
         public abstract TokenType Type { get; }
 
-        public abstract string Value { get; }
-
         public static PropertyExpressionToken Property(string property)
         {
             return new PropertyExpressionToken(property);

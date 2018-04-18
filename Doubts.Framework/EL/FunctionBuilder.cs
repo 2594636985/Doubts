@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Doubts.Framework.EL.Compiler;
+using Doubts.Framework.EL.Compiler.Translation;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -9,40 +11,49 @@ namespace Doubts.Framework.EL
 {
     internal class FunctionBuilder
     {
-        private static readonly Expression _emptyLambda = Expression.Lambda<Action<TextWriter, object>>(Expression.Empty(), Expression.Parameter(typeof(TextWriter)), Expression.Parameter(typeof(object)));
+        private static readonly Expression EmptyLambda = Expression.Lambda<Func<object, object>>(Expression.Constant(null), Expression.Parameter(typeof(object)));
 
-        public Expression Compile(IEnumerable<Expression> expressions, Expression parentContext, string templatePath = null)
+        public Expression Compile(IEnumerable<Expression> expressions, Expression parentContext)
         {
             try
             {
                 if (expressions.Any() == false)
                 {
-                    return _emptyLambda;
+                    return EmptyLambda;
                 }
 
                 if (expressions.IsOneOf<Expression, DefaultExpression>() == true)
                 {
-                    return _emptyLambda;
+                    return EmptyLambda;
                 }
 
-                //var compilationContext = new CompilationContext(_configuration);
+                var objectParameter = Expression.Parameter(typeof(object), "data");
 
-                var expression = CreateExpressionBlock(expressions);
+                var enumerator = expressions.GetEnumerator();
 
-                //expression = CommentVisitor.Visit(expression, compilationContext);
-                //expression = UnencodedStatementVisitor.Visit(expression, compilationContext);
-                //expression = PartialBinder.Bind(expression, compilationContext);
-                //expression = StaticReplacer.Replace(expression, compilationContext);
-                //expression = IteratorBinder.Bind(expression, compilationContext);
-                //expression = BlockHelperFunctionBinder.Bind(expression, compilationContext);
-                //expression = DeferredSectionVisitor.Bind(expression, compilationContext);
-                //expression = HelperFunctionBinder.Bind(expression, compilationContext);
-                //expression = BoolishConverter.Convert(expression, compilationContext);
-                //expression = PathBinder.Bind(expression, compilationContext);
-                //expression = SubExpressionVisitor.Visit(expression, compilationContext);
-                //expression = ContextBinder.Bind(expression, compilationContext, parentContext, templatePath);
+                Expression LambdaExprBody = null;
 
-                return expression;
+                while (enumerator.MoveNext())
+                {
+                    Expression item = enumerator.Current;
+
+                    if (item is ElPropertyExpression)
+                    {
+                        ElPropertyExpression elPropertyExpr = item as ElPropertyExpression;
+
+                        LambdaExprBody = Expression.(elPropertyExpr.PropertyName);
+
+                        if (string.IsNullOrWhiteSpace(elPropertyExpr.Indexes))
+                        {
+
+                        }
+                    }
+                }
+
+
+                return Expression.Lambda<Func<object, object>>(LambdaExprBody, new[] { objectParameter });
+
+
             }
             catch (Exception ex)
             {
@@ -50,12 +61,13 @@ namespace Doubts.Framework.EL
             }
         }
 
-        public Action<TextWriter, object> Compile(IEnumerable<Expression> expressions, string templatePath = null)
+        public Func<object, object> Compile(IEnumerable<Expression> expressions)
         {
             try
             {
-                var expression = Compile(expressions, null, templatePath);
-                return ((Expression<Action<TextWriter, object>>)expression).Compile();
+                var expression = Compile(expressions, null);
+
+                return ((Expression<Func<object, object>>)expression).Compile();
             }
             catch (Exception ex)
             {

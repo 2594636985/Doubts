@@ -7,21 +7,24 @@ namespace Doubts.Framework.EL.Tokens
 {
     internal class PropertyExpressionToken : ExpressionToken
     {
-        private readonly string property;
-
-        public PropertyExpressionToken(string property)
+        private readonly string propertyName;
+        private readonly string indexes;
+        public PropertyExpressionToken(string propertyName) : this(propertyName, null)
         {
-            this.property = property;
         }
+        public PropertyExpressionToken(string propertyName, string indexes)
+        {
+            this.propertyName = propertyName;
+            this.indexes = indexes;
+        }
+
+        public string PropertyName { get { return this.propertyName; } }
+
+        public string Indexes { get { return this.indexes; } }
 
         public override TokenType Type
         {
             get { return TokenType.Property; }
-        }
-
-        public override string Value
-        {
-            get { return property; }
         }
     }
 }

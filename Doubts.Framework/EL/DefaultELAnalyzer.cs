@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using Doubts.Framework.EL.Compiler;
 
 namespace Doubts.Framework.EL
 {
@@ -10,29 +11,14 @@ namespace Doubts.Framework.EL
     {
         private readonly ELCompiler elCompiler;
 
-        public Action<TextWriter, object> Compile(TextReader elReader)
+        public DefaultELAnalyzer()
         {
-            return elCompiler.Compile(elReader);
+            this.elCompiler = new ELCompiler();
         }
 
         public Func<object, object> AnalyzeGetValue(string el)
         {
-            using (StringReader elReader = new StringReader(el))
-            {
-                Action<TextWriter, object> compiledTemplate = Compile(elReader);
-
-                return context =>
-                {
-                    StringBuilder builder = new StringBuilder();
-
-                    using (StringWriter writer = new StringWriter(builder))
-                    {
-                        compiledTemplate(writer, context);
-                    }
-
-                    return builder.ToString();
-                };
-            }
+            return elCompiler.Compile(el);
         }
 
         public Action<object, object> AnalyzeSetValue(string el)

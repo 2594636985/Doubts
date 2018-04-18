@@ -1,5 +1,4 @@
-﻿using Doubts.Framework.EL.Parsers;
-using Doubts.Framework.EL.Tokens;
+﻿using Doubts.Framework.EL.Tokens;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -10,9 +9,7 @@ namespace Doubts.Framework.EL
 {
     internal class Tokenizer
     {
-        private static Parser PropertyParser = new PropertyParser();
-
-        public IEnumerable<Token> Tokenize(TextReader source)
+        public IEnumerable<Token> Tokenize(string source)
         {
             try
             {
@@ -24,129 +21,62 @@ namespace Doubts.Framework.EL
             }
         }
 
-        private IEnumerable<Token> Parse(TextReader source)
+        private IEnumerable<Token> Parse(string source)
         {
-            bool inExpression = false;
-            bool trimWhitespace = false;
-            StringBuilder buffer = new StringBuilder();
-            int node = source.Read();
+            if (string.IsNullOrWhiteSpace(source))
+                throw new InvalidOperationException("the expression is invalid!! check please");
 
-            while (true)
+            int sIndex = 0;
+            int eIndex = 0;
+
+            while (sIndex < source.Length && eIndex < source.Length)
             {
-                if (node == -1)
+                char node = source[eIndex++];
+
+                if (node == '.')
                 {
-                    if (buffer.Length > 0)
-                    {
-                        if (inExpression)
-                        {
-                            throw new InvalidOperationException("Reached end of template before expression was closed");
-                        }
-                        else
-                        {
-                            yield return Token.Static(buffer.ToString());
-                        }
-                    }
-                    break;
+                    string property = source.Substring(sIndex, (eIndex - sIndex - 1));
+
+                    sIndex = eIndex;
+
+                    if (string.IsNullOrWhiteSpace(property))
+                        throw new InvalidDataException("the property name is  empty! check please");
+
+                    yield return new PropertyExpressionToken(property);
                 }
-
-                if (inExpression)
+                else if (node == '[' && (source[eIndex] == '\'' || source[eIndex] == '\"'))
                 {
-                    if ((char)node == '(')
-                    {
-                        yield return Token.StartSubExpression();
-                    }
+                    string property = source.Substring(sIndex, (eIndex - sIndex));
 
-                    Token token = null;
+                    if (string.IsNullOrWhiteSpace(property))
+                        throw new InvalidDataException("the property name is  empty! check please");
 
-                    token = token ?? Tokenizer.PropertyParser.Parse(source);
-                    token = token ?? _literalParser.Parse(source);
-                    token = token ?? _commentParser.Parse(source);
-                    token = token ?? _partialParser.Parse(source);
-                    token = token ?? _blockWordParser.Parse(source);
+                    sIndex = ++eIndex;
 
-                    if (token != null)
-                    {
-                        yield return token;
-                    }
-                    if ((char)node == '}' && (char)source.Read() == '}')
-                    {
-                        bool escaped = true;
-                        if ((char)source.Peek() == '}')
-                        {
-                            node = source.Read();
-                            escaped = false;
-                        }
-                        node = source.Read();
-                        yield return Token.EndExpression(escaped, trimWhitespace);
-                        inExpression = false;
-                    }
-                    else if ((char)node == ')')
-                    {
-                        node = source.Read();
-                        yield return Token.EndSubExpression();
-                    }
-                    else if (char.IsWhiteSpace((char)node) || char.IsWhiteSpace((char)source.Peek()))
-                    {
-                        node = source.Read();
-                    }
-                    else if ((char)node == '~')
-                    {
-                        node = source.Read();
-                        trimWhitespace = true;
-                    }
-                    else
-                    {
-                        if (token == null)
-                        {
+                    while (eIndex < source.Length && source[eIndex] != '\'' && source[eIndex] != '\"')
+                        eIndex++;
 
-                            throw new ELException("Reached unparseable token in expression: " + source.ReadLine());
-                        }
-                        node = source.Read();
-                    }
+                    eIndex++;
+
+                    if ((eIndex) > source.Length || source[eIndex] != ']')
+                        throw new InvalidOperationException("the expression is wrong grammar! check please");
+
+                    string indexes = source.Substring(sIndex, (eIndex - sIndex));
+
+                    sIndex = eIndex;
+
+                    if (string.IsNullOrWhiteSpace(indexes))
+                        throw new InvalidDataException("the indexes name is  empty! check please");
+
+                    yield return new PropertyExpressionToken(property, indexes);
                 }
-                else
+                else if (sIndex < eIndex && eIndex == source.Length - 1)
                 {
-                    if ((char)node == '\\' && (char)source.Peek() == '{')
-                    {
-                        source.Read();
-                        if ((char)source.Peek() == '{')
-                        {
-                            source.Read();
-                            buffer.Append('{', 2);
-                        }
-                        else
-                        {
-                            buffer.Append("\\{");
-                        }
-                        node = source.Read();
-                    }
-                    else if ((char)node == '{' && (char)source.Peek() == '{')
-                    {
-                        bool escaped = true;
-                        trimWhitespace = false;
-                        node = source.Read();
-                        if ((char)source.Peek() == '{')
-                        {
-                            node = source.Read();
-                            escaped = false;
-                        }
-                        if ((char)source.Peek() == '~')
-                        {
-                            source.Read();
-                            node = source.Peek();
-                            trimWhitespace = true;
-                        }
-                        yield return Token.Static(buffer.ToString());
-                        yield return Token.StartExpression(escaped, trimWhitespace);
-                        trimWhitespace = false;
-                        buffer = new StringBuilder();
-                        inExpression = true;
-                    }
-                    else
-                    {
-                        buffer.Append((char)node);
-                        node = source.Read();
-                    }
+                    string property = source.Substring(sIndex);
+
+                    sIndex = eIndex++;
+
+                    yield return new PropertyExpressionToken(property);
                 }
             }
         }

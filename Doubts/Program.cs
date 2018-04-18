@@ -1,5 +1,6 @@
 ﻿using Doubts.AomiEx;
 using Doubts.Framework;
+using Doubts.Framework.EL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,12 +21,16 @@ namespace Doubts
         {
             if (mutex.WaitOne(TimeSpan.Zero, true))
             {
-                AddInManager.Initialize();
+                //AddInManager.Initialize();
 
-                Renderer renderer = AddInManager.GetSingleInstance<Renderer>("/Doubts/Renderer");
+                //Renderer renderer = AddInManager.GetSingleInstance<Renderer>("/Doubts/Renderer");
 
-                if (renderer != null)
-                    renderer.Main(args);
+                //if (renderer != null)
+                //    renderer.Main(args);
+
+                var aa = new { aomi = "aaa", dd = new { name = "ccc" } };
+
+                object obj = AomiEL.GetValue(aa, "aomi.dd");
 
                 mutex.ReleaseMutex();
             }
